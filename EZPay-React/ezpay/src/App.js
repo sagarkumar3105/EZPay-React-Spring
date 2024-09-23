@@ -40,17 +40,8 @@ function App() {
                   </PrivateRoute>} 
             />
              {/* Password Recovery and Reset Routes */}
-          <Route path="/password/forgot" 
-                  element={<PrivateRoute>
-                           < PasswordRecovery />
-                            </PrivateRoute>
-                          } 
-            />
-          <Route path="/password/reset" 
-                element={<PrivateRoute>
-                          <PasswordReset/>
-                      </PrivateRoute>}
-            />
+             <Route path="/password/forgot" element={<PasswordRecovery />} />
+             <Route path="/password/reset" element={<PasswordReset/>}/>
       </Routes>
     </Router>
     </>

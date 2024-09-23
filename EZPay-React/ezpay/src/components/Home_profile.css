@@ -1,0 +1,32 @@
+/* Set the background for the home page */
+.home-container {
+    background: url('../Natwest.png') no-repeat center center;
+    background-size: cover; /* Cover the entire page */
+    opacity: 0.9; /* 90% transparency */
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0; /* Remove any margin */
+    padding: 0;
+  }
+ 
+  h1 {
+    color: white;
+    font-size: 3em;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    background-color: #5A287D;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin-top: 20px;
+  }
+  
+  .button:hover {
+    background-color: #4A1E66;
+  }
+  

@@ -1,0 +1,21 @@
+/* Profile.css */
+.profile-container {
+    padding: 20px;
+  }
+  
+  .profile-details {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .profile-details div {
+    margin-bottom: 10px;
+  }
+  
+  .profile-details strong {
+    font-weight: bold;
+  }
+  

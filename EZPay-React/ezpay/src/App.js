@@ -20,6 +20,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginPage />}/>
+          
+          {/* Password Recovery and Reset Routes */}
+         <Route path="/password/forgot" element={<PasswordRecovery />} />
+         <Route path="/password/reset" element={<PasswordReset/>}/>
 
          {/* Protected Route */}
          <Route
@@ -39,9 +43,7 @@ function App() {
                     <ViewProfile /> 
                   </PrivateRoute>} 
             />
-             {/* Password Recovery and Reset Routes */}
-             <Route path="/password/forgot" element={<PasswordRecovery />} />
-             <Route path="/password/reset" element={<PasswordReset/>}/>
+           
       </Routes>
     </Router>
     </>
@@ -49,3 +51,4 @@ function App() {
 }
 
 export default App;
+

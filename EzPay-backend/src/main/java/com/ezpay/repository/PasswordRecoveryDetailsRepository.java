@@ -9,6 +9,10 @@ import com.ezpay.entity.PasswordRecoveryDetails;
 import java.util.List;
 import java.util.Optional;
 
+/**Author: Sandarbha Komujwar
+ * Date:08/09/2024
+ * Module:Password Recovery 
+ */
 /**
  * Repository interface for handling database operations related to the PasswordRecoveryDetails entity.
  * Extends JpaRepository to provide standard CRUD operations for PasswordRecoveryDetails.

@@ -39,6 +39,12 @@ function App() {
                     <ViewProfile /> 
                   </PrivateRoute>} 
             />
+            {/* Add the new Update Profile route here */}
+        <Route path="/update-profile" element={
+          <PrivateRoute>
+            <ProfileUpdate />
+          </PrivateRoute>
+        } />
              {/* Password Recovery and Reset Routes */}
              <Route path="/password/forgot" element={<PasswordRecovery />} />
              <Route path="/password/reset" element={<PasswordReset/>}/>

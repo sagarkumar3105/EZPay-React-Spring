@@ -58,6 +58,9 @@ function Navbar() {
                     <Link className="dropdown-item" to="/view-profile">View Profile</Link>
                   </li>
                   <li>
+          <a className="dropdown-item" href="/update-profile">Update Profile</a>
+        </li>
+                  <li>
                     <button className="dropdown-item" onClick={handleLogout}>
                       Logout
                     </button>

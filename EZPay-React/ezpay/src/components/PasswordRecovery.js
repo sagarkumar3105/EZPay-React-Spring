@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
  * PasswordRecovery component handles the user interface and logic for
  * requesting a password reset. It allows users to enter their email or mobile number
  * and sends them a reset link if the input is valid.
- * 
+ * Validation methods: @Aman Rauth
  * @Author: Riya Shah
  */
 const PasswordRecovery = () => {

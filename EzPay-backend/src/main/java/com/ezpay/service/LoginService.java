@@ -45,6 +45,9 @@ public class LoginService {
 	        return false; // User not found
 	 }
 	 
+	 public boolean checkUserId(String userId){
+		return loginDataRepository.findById(userId).isPresent();
+	 }
 	 @Transactional
 	 public boolean registerUser(String userId, String password)
 	 {
@@ -53,7 +56,7 @@ public class LoginService {
 	            return false; // userId already exists
 	        }
 	        // Creating a temporary customer object for initial registration.
-	        Customer customer = masterDataservice.AddTempProfileDetails(userId);
+	        Customer customer = masterDataservice.AddTempProfileDetailsAndSave(userId);
 	        
 	        String hashedPassword=PasswordUtils.hashPassword(password);
 	        

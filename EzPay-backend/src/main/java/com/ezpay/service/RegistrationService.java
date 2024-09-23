@@ -2,6 +2,7 @@ package com.ezpay.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ezpay.entity.Customer;
-import com.ezpay.entity.LoginData;
 import com.ezpay.repository.MasterDataRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -27,20 +26,18 @@ public class RegistrationService {
 	private MasterDataRepository masterDataRepository;
 	
 	@Transactional
-	public Customer AddTempProfileDetails(String userId) {
+	public Customer AddTempProfileDetailsAndSave(String userId) {
 		Customer customer=new Customer();
-		String userIdFiller=userId.length() > 10? userId.substring(0, 9):userId+"0".repeat(10 - userId.length());
-		
-        customer.setName("TEMP_NAME"+userIdFiller); // Temporary value
-        customer.setEmail("TEMP_EMAIL"+userIdFiller); // Temporary value
-        customer.setMobileNumber(userIdFiller); // Temporary value
-        customer.setAddress("TEMP_ADDRESS"+userIdFiller); // Temporary value
+        customer.setName(userId); // Temporary value
+        customer.setEmail(userId); // Temporary value
+        customer.setMobileNumber(userId); // Temporary value
+        customer.setAddress(userId); // Temporary value
         customer.setDob(LocalDateTime.now()); // Temporary DOB
-        customer.setGender("UNKNOWN"); // Temporary value
+        customer.setGender(userId); // Temporary value
         customer.setProfilePictureUrl(null); // Empty or placeholder for profile picture
-        customer.setUpiId(userIdFiller); // Temporary UPI ID
-        customer.setBankAccountNumber(userIdFiller); // Temporary bank account number
-        customer.setIfscCode(userIdFiller); // Temporary IFSC code
+        customer.setUpiId(userId); // Temporary UPI ID
+        customer.setBankAccountNumber(userId); // Temporary bank account number
+        customer.setIfscCode(userId); // Temporary IFSC code
         customer.setAccountType(1); 
         
         // Fixed values
@@ -90,5 +87,13 @@ public class RegistrationService {
 	public Customer getCustomerProfile(Long customerId) {
 		return masterDataRepository.findById(customerId).get();
 	}
-
+	
+	public boolean checkEmailExists(JsonNode payload) {
+		List<Customer> customers = masterDataRepository.findByEmail(payload.get("email").asText());
+		return customers.isEmpty();
+	}
+	public boolean checkMobileNumberExists(JsonNode payload){
+		List<Customer> customers = masterDataRepository.findByMobileNumber(payload.get("mobileNumber").asText());
+		return customers.isEmpty();
+	}
 }

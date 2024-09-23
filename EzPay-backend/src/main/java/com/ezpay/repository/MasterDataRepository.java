@@ -10,7 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.ezpay.entity.Customer;
 
+import java.util.List;
+
 @Repository
 public interface MasterDataRepository extends JpaRepository<Customer, Long> {
-
+	List<Customer> findByEmail(String email);
+	
+	List<Customer> findByMobileNumber(String mobileNumber);
 }

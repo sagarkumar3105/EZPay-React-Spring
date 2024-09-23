@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.*;
 
 import com.ezpay.service.PasswordRecoveryService;
 
+/**Author: Sandarbha Komujwar
+ * Date:08/09/2024
+ * Module:Password Recovery 
+ */
 /**
  * Controller to handle password recovery requests, such as forgot password and resetting the password.
  */

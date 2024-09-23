@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import './Navbar.css'; // Import the CSS
 
 function Navbar() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">EZPay</Link>
 
@@ -42,7 +43,7 @@ function Navbar() {
 
           <div className="dropdown">
             <button
-              className="btn btn-secondary dropdown-toggle"
+              className="btn dropdown-toggle"
               type="button"
               id="dropdownMenuButton"
               data-bs-toggle="dropdown"
@@ -57,6 +58,7 @@ function Navbar() {
                   <li>
                     <Link className="dropdown-item" to="/view-profile">View Profile</Link>
                   </li>
+                  <div className="dropdown-divider"></div> {/* Optional divider */}
                   <li>
           <a className="dropdown-item" href="/update-profile">Update Profile</a>
         </li>

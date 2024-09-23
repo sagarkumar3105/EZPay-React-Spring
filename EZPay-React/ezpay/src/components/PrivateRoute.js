@@ -9,12 +9,11 @@ const PrivateRoute = ({ children }) => {
     return <Navigate to="/login" replace />;
   }
 
-  if (!isProfileInfoSet) {
+  if (!isProfileInfoSet && window.location.pathname !== '/initial-profile-update') {
     // If the profile info is not set, allow only access to profile update
-    if (window.location.pathname !== '/initial-profile-update') {
+    
       alert('Please complete your profile information before proceeding.');
       return <Navigate to="/initial-profile-update" replace />;
-    }
   }
 
   return children;

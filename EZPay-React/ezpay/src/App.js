@@ -8,6 +8,8 @@ import ProfileHome from './components/ProfileHome';
 import InitialProfileUpdatePage from './components/InitialProfileUpdatePage';
 import PrivateRoute from './components/PrivateRoute';
 import ViewProfile from "./components/ViewProfile";
+import PasswordRecovery from './components/PasswordRecovery';
+import PasswordReset from './components/PasswordReset';
 
 function App() {
   return (
@@ -26,15 +28,28 @@ function App() {
                        <ProfileHome/>
                       </PrivateRoute>}
           />
-          <Route path="/initial-profile-update" 
-                  element={<PrivateRoute>
-                    <InitialProfileUpdatePage /> 
+          <Route 
+          path="/initial-profile-update" 
+          element={<PrivateRoute>
+                    <InitialProfileUpdatePage />
                   </PrivateRoute>} 
-            />
+        />
           <Route path="/view-profile" 
                   element={<PrivateRoute>
                     <ViewProfile /> 
                   </PrivateRoute>} 
+            />
+             {/* Password Recovery and Reset Routes */}
+          <Route path="/password/forgot" 
+                  element={<PrivateRoute>
+                           < PasswordRecovery />
+                            </PrivateRoute>
+                          } 
+            />
+          <Route path="/password/reset" 
+                element={<PrivateRoute>
+                          <PasswordReset/>
+                      </PrivateRoute>}
             />
       </Routes>
     </Router>

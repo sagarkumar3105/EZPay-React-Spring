@@ -28,16 +28,19 @@ public class RegistrationService {
 	@Transactional
 	public Customer AddTempProfileDetailsAndSave(String userId) {
 		Customer customer=new Customer();
-        customer.setName(userId); // Temporary value
-        customer.setEmail(userId); // Temporary value
-        customer.setMobileNumber(userId); // Temporary value
-        customer.setAddress(userId); // Temporary value
+		
+		String userIdFiller= userId.length()>10 ? userId.substring(0, 9) : userId + "0".repeat(10-userId.length());
+		
+        customer.setName("TEMP_NAME"+userIdFiller); // Temporary value
+        customer.setEmail("TEMP_EMAIL"+userIdFiller); // Temporary value
+        customer.setMobileNumber(userIdFiller); // Temporary value
+        customer.setAddress("TEMP_ADDRESS"+userIdFiller); // Temporary value
         customer.setDob(LocalDateTime.now()); // Temporary DOB
-        customer.setGender(userId); // Temporary value
+        customer.setGender("UNKOWN"); // Temporary value
         customer.setProfilePictureUrl(null); // Empty or placeholder for profile picture
-        customer.setUpiId(userId); // Temporary UPI ID
-        customer.setBankAccountNumber(userId); // Temporary bank account number
-        customer.setIfscCode(userId); // Temporary IFSC code
+        customer.setUpiId(userIdFiller); // Temporary UPI ID
+        customer.setBankAccountNumber(userIdFiller); // Temporary bank account number
+        customer.setIfscCode(userIdFiller); // Temporary IFSC code
         customer.setAccountType(1); 
         
         // Fixed values

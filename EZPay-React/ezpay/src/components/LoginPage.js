@@ -28,11 +28,14 @@ localStorage.clear()
     });
 
     if (response.ok) {
+      
       const responseData = await response.json();
 
       const customerId = responseData.customerId;
       // Store customerId in localStorage
       localStorage.setItem('customerId', customerId);
+      localStorage.setItem("isProfileInfoSet",responseData.profileInfoSetStatus);
+
       if (responseData.profileInfoSetStatus) {
 
          // Extract customerId from response

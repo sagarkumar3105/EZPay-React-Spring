@@ -4,6 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 export default function InitialProfileUpdatePage() {
+  alert('Please complete your profile information before proceeding.');
   const {
     register,
     watch,
@@ -51,8 +52,8 @@ export default function InitialProfileUpdatePage() {
     return response.ok;
   }
 
-  console.log(watch());
-  console.log(errors);
+  //console.log(watch());
+  //console.log(errors);
   const validateEmail = async (email) => {
     const response = await fetch(
       "http://localhost:8005/api/check_if_email_present",
@@ -85,9 +86,9 @@ export default function InitialProfileUpdatePage() {
       console.log(profileData);
     }
   };
-
   return (
     <>
+      
       <h1>Complete Your Profile</h1>
       <div className="profile-update-container">
         <form

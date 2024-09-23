@@ -8,6 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**Author: Sandarbha Komujwar
+ * Date:08/09/2024
+ * Module:Password Recovery 
+ */
 /**
  * Configuration class for setting up security features in the application.
  * It defines password encoding and configures security rules for HTTP requests.

@@ -1,4 +1,5 @@
 import React from 'react';
+import Swal from 'sweetalert2';
 import { useNavigate, Link } from 'react-router-dom';
 import './Navbar.css'; // Import the CSS
 
@@ -8,7 +9,13 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.clear();
-    alert("You have successfully logged out.");
+    Swal.fire({
+      title: 'Success!',
+      text: 'You have successfully logged out.',
+      icon: 'success',
+      confirmButtonText: 'Okay',
+    });
+    //alert("You have successfully logged out.");
     navigate('/login'); // Redirect to login page
   };
 
@@ -36,7 +43,7 @@ function Navbar() {
             </li>
             {customerId && (
               <li className="nav-item">
-                <Link className="nav-link" to="/view-profile">Profile</Link>
+                <Link className="nav-link active" to="/view-profile">View Profile</Link>
               </li>
             )}
           </ul>
@@ -57,11 +64,13 @@ function Navbar() {
                 <>
                   <li>
                     <Link className="dropdown-item" to="/view-profile">View Profile</Link>
+          
                   </li>
                   <div className="dropdown-divider"></div> {/* Optional divider */}
                   <li>
-          <a className="dropdown-item" href="/update-profile">Update Profile</a>
-        </li>
+                    <a className="dropdown-item" href="/update-profile">Update Profile</a>
+                  </li>
+                  <div className="dropdown-divider"></div> {/* Optional divider */}
                   <li>
                     <button className="dropdown-item" onClick={handleLogout}>
                       Logout

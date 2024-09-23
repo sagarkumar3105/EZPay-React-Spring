@@ -31,6 +31,8 @@ public class RegistrationService {
 		
 		String userIdFiller= userId.length()>10 ? userId.substring(0, 9) : userId + "0".repeat(10-userId.length());
 		
+		
+		
         customer.setName("TEMP_NAME"+userIdFiller); // Temporary value
         customer.setEmail("TEMP_EMAIL"+userIdFiller); // Temporary value
         customer.setMobileNumber(userIdFiller); // Temporary value

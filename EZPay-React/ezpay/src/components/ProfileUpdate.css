@@ -1,273 +1,80 @@
-/* Global background gradient */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, rgba(50, 11, 134, 0.9), rgba(106, 27, 154, 0.9));
-  min-height: 100vh;
-  text-align: center;
-  overflow-y: auto; 
+.container {
+  max-width: 600px; /* Set a maximum width for the form */
+  margin: 20px auto; /* Center the container */
+  padding: 20px;
+  background-color: #f8f9fa; /* Light gray background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow */
+}
+
+h2 {
+  text-align: center; /* Center the heading */
+  color: #c74d4d; /* Faded red */
 }
 
 .input-container {
-  position: relative;
-  width: 400px;
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Space between input fields */
+}
+
+label {
+  display: block; /* Make label a block element */
+  margin-bottom: 5px; /* Space between label and input */
+  font-weight: bold; /* Bold label */
+}
+
+input {
+  width: 100%; /* Full width */
+  padding: 10px; /* Padding inside input */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+input:focus {
+  border-color: #c74d4d; /* Change border color on focus */
+  outline: none; /* Remove default outline */
 }
 
 .popup-box {
-  position: absolute;
-  top: -20px; /* Adjust the position above the input field */
-  left: 0;
-  background-color: red;
-  color: white;
-  padding: 8px;
-  border-radius: 5px;
-  font-size: 14px;
-  z-index: 1;
-  white-space: nowrap;
-}
-.popup-boxx {
-  position: absolute;
-  top: -40px; /* Adjust the position above the input field */
-  left: 0;
-  background-color: red;
-  color: white;
-  padding: 8px;
-  border-radius: 5px;
-  font-size: 14px;
-  z-index: 1;
-  white-space: nowrap;
-}
-.popup-boxx::after {
-  content: '';
-  position: absolute;
-  top: 100%; /* Arrow pointing down */
-  left: 20px;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: red transparent transparent transparent;
-}
-.popup-box::after {
-  content: '';
-  position: absolute;
-  top: 100%; /* Arrow pointing down */
-  left: 20px;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: red transparent transparent transparent;
+  color: #c74d4d; /* Faded red for error messages */
+  margin-top: 5px; /* Space above the popup */
+  font-size: 14px; /* Font size for the error message */
 }
 
-
-.validation-error {
-  color: red;
-  font-size: 14px;
-}
-
-.message-error {
-  color: red;
-  font-size: 16px;
-  margin-top: 10px;
-}
-
-
-/* Style for the App container */
-.App {
-  text-align: center;
-  width: 100%;
-  padding: 20px;
-  color: white;
-}
-
-/* Navbar styles */
-.navbar {
-  background-color: #5A287D;
-  padding: 15px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
-
-/* Home button styles */
-.navbar a.home-link {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: red;
-  color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 18px;
-  margin-left: 10px;
-}
-
-/* Back button container */
-.back-btn-container {
-  position: fixed;
-  top: 15px;
-  right: 130px;
-  z-index: 1000;
-}
-
-/* Back button styles */
-.back-btn {
-  padding: 12px 24px;
-  background-color: red;
-  color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-}
-
-.back-btn:hover {
-  background-color: #b30000;
-}
-
-/* Container styles for page contents */
-/* Container styles for page contents */
-.container {
-  width: 90%;
-  max-width: 600px;
-  margin: auto;
-  text-align: center;
-  padding-top: 150px; /* Adjusted top padding to move it down */
-  background-color: rgba(255, 255, 255, 0.5);
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow for a clean effect */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centers child elements horizontally */
-}
-
-/* Input box for Customer ID */
-input[type="text"],
-input[type="email"],
-input[type="date"],
-select {
-  padding: 12px;
-  font-size: 18px;
-  width: 100%;
-  max-width: 400px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-bottom: 20px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for inputs */
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-/* Button styles for Fetch Profile */
-button.fetch-btn {
-  padding: 12px 24px;
-  background-color: #4A148C;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-button.fetch-btn:hover {
-  background-color: #7B1FA2;
-}
-
-/* Profile details */
-.profile-info p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: white;
-}
-
-/* Update profile button */
-button.update-btn {
-  padding: 12px 24px;
-  background-color: #4A148C;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-button.update-btn:hover {
-  background-color: #7B1FA2;
-}
-
-/* Error or success message styling */
 .message {
-  font-size: 22px;
-  font-weight: bold;
-  color: #4CAF50; /* Green for success */
-  margin-bottom: 20px;
-  padding: 10px;
-  background-color: rgba(235, 255, 235, 0.8);  /* Light green background */
-  border-radius: 5px;
-  text-align: center;
+  margin: 10px 0; /* Space around message */
+  text-align: center; /* Center the message */
+  color: #28a745; /* Green for success messages */
 }
 
-.message-error {
-  font-size: 22px;
-  font-weight: bold;
-  color: #d32f2f;  /* Red color to indicate an error */
-  margin-top: 15px;
-  padding: 10px;
-  background-color: rgba(255, 235, 235, 0.8);  
-  border-radius: 5px;
-  text-align: center;
+.button {
+  width: 100%; /* Full width for buttons */
+  padding: 10px; /* Padding inside button */
+  background-color: rgb(255, 111, 97); /* Faded red */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition */
 }
 
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-  .navbar a.home-link {
-    font-size: 16px;
-    padding: 10px 20px;
-  }
-
-  button.button, button.update-btn {
-    font-size: 16px;
-    padding: 10px 20px;
-  }
-
-  input[type="text"] {
-    width: 90%;
-  }
-
-  .profile-info p {
-    font-size: 14px;
-  }
-}
-.profile-pic-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+.button:hover {
+  background-color: #a33a3a; /* Darker shade on hover */
 }
 
-.profile-pic {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%; /* Makes the image round */
-  object-fit: cover; /* Ensures the image covers the entire container */
-  border: 2px solid #fff;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+      padding: 15px; /* Reduce padding for mobile */
+  }
+
+  input {
+      font-size: 14px; /* Smaller font size for inputs */
+  }
+
+  .button {
+      font-size: 14px; /* Smaller font size for buttons */
+  }
 }

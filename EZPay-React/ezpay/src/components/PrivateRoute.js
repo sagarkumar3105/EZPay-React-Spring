@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem('customerId') !== null; // Check if the user is logged in
@@ -11,8 +12,13 @@ const PrivateRoute = ({ children }) => {
 
   if (!isProfileInfoSet && window.location.pathname !== '/initial-profile-update') {
     // If the profile info is not set, allow only access to profile update
-    
-      alert('Please complete your profile information before proceeding.');
+      Swal.fire({
+        title: 'Warning!',
+        text: 'Please complete your profile information before proceeding',
+        icon: 'warning',
+        confirmButtonText: 'Okay',
+      });
+      //alert('Please complete your profile information before proceeding.');
       return <Navigate to="/initial-profile-update" replace />;
   }
 

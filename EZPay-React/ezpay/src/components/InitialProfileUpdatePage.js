@@ -2,9 +2,9 @@ import "./InitialProfileUpdatePage.css";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 export default function InitialProfileUpdatePage() {
-  //alert('Please complete your profile information before proceeding.');
   const {
     register,
     watch,
@@ -78,12 +78,16 @@ export default function InitialProfileUpdatePage() {
     );
 
     if (response.ok) {
-      // alert("Profile updated successfully");
       localStorage.setItem("isProfileInfoSet",true)
       navigate("/profileHome"); // Redirect to profile page after successful update
     } else {
       const errorMsg = await response.text();
-      alert("Profile update failed: " + errorMsg);
+      Swal.fire({
+        title: 'Failed!',
+        text: 'Profile Update Failed',
+        icon: 'error',
+        confirmButtonText: 'Okay',
+      });//("Profile update failed: " + errorMsg);
       console.log(profileData);
     }
   };

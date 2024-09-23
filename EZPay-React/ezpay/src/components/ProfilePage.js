@@ -12,9 +12,21 @@ const ProfilePage = () => {
                 body: JSON.stringify(formData),
             });
             if (response.ok) {
-                alert('Profile updated successfully');
+                Swal.fire({
+                    title: 'Update Success!',
+                    text: 'Profile Changes saved.',
+                    icon: 'success',
+                    confirmButtonText: 'Okay',
+                  });
+                //alert('Profile updated successfully');
             } else {
-                alert('Failed to update profile');
+                Swal.fire({
+                    title: 'Update Failed!',
+                    text: 'Changes not Saved',
+                    icon: 'warning',
+                    confirmButtonText: 'Okay',
+                  });
+                //alert('Failed to update profile');
             }
         } catch (error) {
             console.error('Error:', error);

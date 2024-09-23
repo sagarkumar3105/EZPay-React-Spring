@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import '../css/ProfileUpdate.css';
+import './ProfileUpdate.css';
 
 const ProfileUpdate = () => {
   const { customerId } = useParams(); 
@@ -214,11 +214,10 @@ if (!formData.accNo.trim()) {
           {showPopup.accNo && <div className="popup-box">{errors.accNo}</div>}
         </div>
 
-        <button className="button" type="submit">
-          Update Profile
+        <button className="button" type="submit" onClick={() => navigate('/')}>
+          Update Details
         </button>
       </form>
-      <button className="button" onClick={() => navigate('/')}>Done</button>
     </div>
   );
 };

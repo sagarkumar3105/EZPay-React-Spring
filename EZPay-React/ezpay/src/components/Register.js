@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import "./Register.css"; // Import the CSS file
 import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import Swal from 'sweetalert2';
 
 export default function Register() {
   localStorage.removeItem("customerId");
@@ -46,11 +47,23 @@ export default function Register() {
     });
 
     if (response.ok) {
-      alert("Registration successful. Proceed for login");
+      Swal.fire({
+        title: 'Registration successful!',
+        text: 'Proceed for login.',
+        icon: 'success',
+        confirmButtonText: 'Login',
+      });
+      //alert("Registration successful. Proceed for login");
       navigate("/login");
     } else {
       const errorMsg = await response.text();
-      alert("Registration failed: " + errorMsg);
+      Swal.fire({
+        title: 'Registration Failed!',
+        text: 'Account not created',
+        icon: 'error',
+        confirmButtonText: 'Okay',
+      });
+      //alert("Registration failed: " + errorMsg);
     }
 
     console.log("Form data:", data);

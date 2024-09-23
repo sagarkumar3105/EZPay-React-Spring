@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './PasswordRecovery.css';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 /**
  * PasswordRecovery component handles the user interface and logic for
@@ -84,7 +85,13 @@ const PasswordRecovery = () => {
      */
     const handleSendResetLink = () => {
         if (isEmailSubmitted) {
-            alert('Please check your inbox! A reset link will be sent again in 10 minutes');
+            Swal.fire({
+                title: 'Link Sent!',
+                text: 'Please check your inbox! A reset link will be sent again in 10 minutes',
+                icon: 'info',
+                confirmButtonText: 'Okay',
+              });
+            //alert('Please check your inbox! A reset link will be sent again in 10 minutes');
             setCountdown(600); // Set countdown to 10 minutes (600 seconds)
         }
     };
@@ -134,7 +141,7 @@ const PasswordRecovery = () => {
                 {isEmailSubmitted && (
                     <div>
                         <p>Please check your email for a password reset link.</p>
-                        <button onClick={handleSendResetLink}>Send Reset Link</button>
+                        <button onClick={handleSendResetLink}>Re-Send Reset Link</button>
                         {countdown > 0 && (
                             <p>Time remaining: {Math.floor(countdown / 60)}:{(countdown % 60).toString().padStart(2, '0')}</p>
                         )}

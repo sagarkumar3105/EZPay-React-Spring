@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './LoginPage.css'; 
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
-
+import Swal from 'sweetalert2';
 
 export default function LoginForm() {
 //  localStorage.setItem('temp', "0000");
@@ -50,7 +50,12 @@ localStorage.clear()
       console.log(response)
       const errorMsg = await response.json();
       setError(errorMsg);
-      alert("Error: " + errorMsg.message); 
+      Swal.fire({
+        title: 'Erro!',
+        text: "Error: " + errorMsg.message,
+        icon: 'error',
+        confirmButtonText: 'Okay',
+      });
     }
   }
   return (
@@ -86,6 +91,9 @@ localStorage.clear()
             <button type="submit" className="form-button">Login</button>
             <button type="reset" className="form-button" onClick={() => { setUserId(''); setPassword(''); }}>Reset</button>
           </div>
+          <p className="forgot-password-link" onClick={() => navigate('/password/forgot')} style={{ cursor: 'pointer', color: 'blue' }}>
+        Forgot Password?
+      </p>
         </form>
       </div>
     </>

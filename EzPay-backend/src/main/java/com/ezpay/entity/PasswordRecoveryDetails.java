@@ -3,6 +3,10 @@ package com.ezpay.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+/**Author: Sandarbha Komujwar
+ * Date:08/09/2024
+ * Module:Password Recovery 
+ */
 /**
  * Entity class representing the password recovery details for a customer in the EzPay application.
  * This class contains information related to password recovery, such as the recovery token, its creation and expiration dates, 

@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**Author: Sandarbha Komujwar
  * Date:08/09/2024
@@ -64,8 +65,11 @@ public class PasswordRecoveryService {
 	 *         if the account is not found
 	 */
 	public String createPasswordResetToken(String emailOrMobile) {
-		Optional<Customer> customerOptional = masterDataRepository.findByEmail(emailOrMobile)
-				.or(() -> masterDataRepository.findByMobileNumber(emailOrMobile));
+		List<Customer> customersByEmail = masterDataRepository.findByEmail(emailOrMobile);
+		List<Customer> customersByMobile = masterDataRepository.findByMobileNumber(emailOrMobile);
+
+		Optional<Customer> customerOptional = Stream.concat(customersByEmail.stream(), customersByMobile.stream())
+		    .findFirst();
 
 		if (customerOptional.isPresent()) {
 			Customer customer = customerOptional.get();

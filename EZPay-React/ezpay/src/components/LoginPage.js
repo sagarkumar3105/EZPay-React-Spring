@@ -86,6 +86,11 @@ localStorage.clear()
         <button type="submit" className="btn">Login</button>
         <button type="reset" className="btn"  onClick={() => { setUserId(''); setPassword(''); }}>Reset</button>
       </div>
+
+      <p className="forgot-password-link" onClick={() => navigate('/password/forgot')} style={{ cursor: 'pointer', color: 'blue' }}>
+        Forgot Password?
+      </p>
+
       </form>
     </>
   );

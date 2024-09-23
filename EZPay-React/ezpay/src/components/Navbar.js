@@ -60,6 +60,9 @@ function Navbar() {
                   </li>
                   <div className="dropdown-divider"></div> {/* Optional divider */}
                   <li>
+          <a className="dropdown-item" href="/update-profile">Update Profile</a>
+        </li>
+                  <li>
                     <button className="dropdown-item" onClick={handleLogout}>
                       Logout
                     </button>

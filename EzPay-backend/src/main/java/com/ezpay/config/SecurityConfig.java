@@ -40,10 +40,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     	  // Business Logic: Disable CSRF protection for non-browser clients and permit access to password recovery endpoints
         http
+        //Adding this for Profile Management ease of routing
+            .cors()
+            .and()
             .csrf().disable()  // Disable CSRF protection for non-browser clients
             .authorizeRequests()
             	.requestMatchers("/api/login", "/api/register-user").permitAll()	//Allow access to Login APIs
-                .requestMatchers("/api/password/forgot", "/api/password/reset").permitAll()  // Allow access to password recovery APIs
+                .requestMatchers("/api/password/forgot", "/api/password/reset").permitAll() 
+                // Allow access to password recovery APIs
+                .requestMatchers("/customers/by-id/**").permitAll()
+                .requestMatchers("/customers/update").permitAll()
                 .requestMatchers("/api/add-profile-details", "/api/view-profile").permitAll()	//Allow access to registration APIs
                 .anyRequest().authenticated()  // All other endpoints require authentication
             .and()

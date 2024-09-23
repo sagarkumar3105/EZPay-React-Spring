@@ -39,6 +39,20 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+<!--		junit bom for testing -->
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>5.11.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -60,16 +74,34 @@
 		    <artifactId>spring-security-core</artifactId>
 		    <version>5.7.0</version> <!-- Check for the latest version -->
 		</dependency>
-
 	</dependencies>
 
 	<build>
 		<plugins>
+<!--			required for tests-->
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.3.1</version>
+				</plugin>
+			<!--			required for tests-->
+				<plugin>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>3.3.1</version>
+				</plugin>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
+            </plugin>
+        </plugins>
 	</build>
 
 </project>

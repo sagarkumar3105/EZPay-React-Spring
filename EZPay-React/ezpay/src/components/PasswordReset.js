@@ -6,7 +6,7 @@ import './PasswordReset.css';
  * PasswordReset component allows users to reset their password using a token 
  * provided via email. It includes form validation and communicates with the 
  * backend API to handle the password reset process.
- * 
+ * Validation methods: @Aman Rauth
  * @Author: Riya Shah
  */
 const PasswordReset = () => {

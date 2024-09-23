@@ -55,43 +55,39 @@ localStorage.clear()
   }
   return (
     <>
-      <h1>Hello Dear Customer</h1>
-      <form onSubmit={handleSubmit}>
-      <div className="login-info">
-        <div className="form-group">
-          <label htmlFor="userId" className="login-info-label">User Id</label>
-          <input
-            type="text"
-            className="login-info-control"
-            id="userId"
-            placeholder="your user ID"
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password" className="login-info-label">Password</label>
-          <input
-            type="password"
-            className="login-info-control"
-            id="password"
-            placeholder="******"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+     <h1>Hello Dear Customer</h1>
+      <div className="form-container">
+       
+        <form onSubmit={handleSubmit}>
+          <div className="login-info">
+            <div className="form-group">
+              <label htmlFor="userId" className="login-info-label">User Id</label>
+              <input
+                type="text"
+                className="login-info-control"
+                id="userId"
+                placeholder="your user ID"
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
+              />
+            
+              <label htmlFor="password" className="login-info-label">Password</label>
+              <input
+                type="password"
+                className="login-info-control"
+                id="password"
+                placeholder="******"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="form-buttons">
+            <button type="submit" className="form-button">Login</button>
+            <button type="reset" className="form-button" onClick={() => { setUserId(''); setPassword(''); }}>Reset</button>
+          </div>
+        </form>
       </div>
-      <div className="form-buttons">
-        <button type="submit" className="btn">Login</button>
-        <button type="reset" className="btn"  onClick={() => { setUserId(''); setPassword(''); }}>Reset</button>
-      </div>
-
-      <p className="forgot-password-link" onClick={() => navigate('/password/forgot')} style={{ cursor: 'pointer', color: 'blue' }}>
-        Forgot Password?
-      </p>
-
-      </form>
     </>
   );
 }

@@ -19,6 +19,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**Author: Sandarbha Komujwar
+ * Date:08/09/2024
+ * Module:Password Recovery 
+ */
 /**
  * Service class to handle password recovery operations like creating a reset
  * token, sending emails, and resetting the password.

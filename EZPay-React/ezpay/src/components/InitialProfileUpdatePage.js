@@ -4,7 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 export default function InitialProfileUpdatePage() {
-  alert('Please complete your profile information before proceeding.');
+  //alert('Please complete your profile information before proceeding.');
   const {
     register,
     watch,
@@ -79,6 +79,7 @@ export default function InitialProfileUpdatePage() {
 
     if (response.ok) {
       // alert("Profile updated successfully");
+      localStorage.setItem("isProfileInfoSet",true)
       navigate("/profileHome"); // Redirect to profile page after successful update
     } else {
       const errorMsg = await response.text();
@@ -278,7 +279,7 @@ export default function InitialProfileUpdatePage() {
               {...register("ifscCode", {
                 required: "Enter IFSC Code",
                 pattern: {
-                  value: /^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/,
+                  value: /^[A-Za-z]{3}[A-Z0-9a-z]{8}$/,
                   message: "Invalid IFSC Code",
                 },
               })}

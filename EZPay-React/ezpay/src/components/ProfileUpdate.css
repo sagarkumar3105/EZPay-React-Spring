@@ -78,3 +78,31 @@ input:focus {
       font-size: 14px; /* Smaller font size for buttons */
   }
 }
+.password-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content button {
+  margin: 10px 0; 
+  padding: 10px 20px;     
+}
+.modal-content {
+  display:flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 10px 0px;
+}
+
+.error-message {
+  color: red;
+}

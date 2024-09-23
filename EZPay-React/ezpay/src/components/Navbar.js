@@ -42,10 +42,15 @@ function Navbar() {
               <Link className="nav-link active" aria-current="page" to="/">Home</Link>
             </li>
             {customerId && (
-              <li className="nav-item">
-                <Link className="nav-link active" to="/view-profile">View Profile</Link>
-              </li>
-            )}
+  <>
+    <li className="nav-item">
+      <Link className="nav-link active" to="/view-profile">View Profile</Link>
+    </li>
+    <li className="nav-item">
+      <Link className="nav-link active" to="/update-profile">Update Profile</Link>
+    </li>
+  </>
+)}
           </ul>
 
           <div className="dropdown">

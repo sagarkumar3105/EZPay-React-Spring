@@ -1,6 +1,7 @@
 package com.ezpay.controller;
 
 import org.slf4j.Logger;
+import java.util.Map;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,21 @@ public class ProfileManagementController {
         logger.info("Fetched customer details: {}", customer);
         return customer;
     }
+    
+    
+    // Verify password before profile update
+    @PostMapping("/verify-password")
+    public ResponseEntity<?> verifyPassword(@RequestBody Map<String, String> requestData) {
+        String customerId = requestData.get("customerId");
+        String password = requestData.get("password");
 
-    // Add a new customer to the database
-    @PostMapping("/add")
-    public Customer addCustomer(@RequestBody Customer customer) {
-        logger.info("Adding new customer: {}", customer);
-        Customer newCustomer = customerService.addCustomer(customer);
-        logger.info("Customer added successfully: {}", newCustomer);
-        return newCustomer;
+        boolean isValidPassword = customerService.verifyPassword(Long.parseLong(customerId), password);
+
+        if (isValidPassword) {
+            return ResponseEntity.ok("Password verified");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password");
+        }
     }
 
     // Update customer details using customerId from request header

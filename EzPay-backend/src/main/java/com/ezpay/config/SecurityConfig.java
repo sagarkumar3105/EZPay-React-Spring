@@ -46,11 +46,12 @@ public class SecurityConfig {
             .csrf().disable()  // Disable CSRF protection for non-browser clients
             .authorizeRequests()
             	.requestMatchers("/api/login", "/api/register-user").permitAll()	//Allow access to Login APIs
-                .requestMatchers("/api/password/forgot", "/api/password/reset").permitAll() 
-                // Allow access to password recovery APIs
+                .requestMatchers("/api/password/forgot", "/api/password/reset").permitAll() // Allow access to password recovery APIs
+                //Allow access for profile updates
                 .requestMatchers("/customers/by-id/**").permitAll()
                 .requestMatchers("/customers/update").permitAll()
-                .requestMatchers("/api/add-profile-details", "/api/view-profile").permitAll()	//Allow access to registration APIs
+                .requestMatchers("/customers/verify-password").permitAll()
+                .requestMatchers("/api/add-profile-details", "/api/view-profile","/customers/update").permitAll()	//Allow access to registration APIs
                 .anyRequest().authenticated()  // All other endpoints require authentication
             .and()
             .formLogin().disable();  // Disable form-based login, as it's not needed for this configuration

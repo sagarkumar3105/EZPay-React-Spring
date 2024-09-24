@@ -32,6 +32,7 @@ public class RegistrationController {
 	
 	@PutMapping("/check_if_email_present")
 	public ResponseEntity<String> checkEmail(@RequestBody JsonNode payload){
+	    System.out.println("Received request to check email: " + payload);
 		JsonNode value = payload.findValue("email");
 		if (value==null){
 			return ResponseEntity.status(402).body("the value provided is null");

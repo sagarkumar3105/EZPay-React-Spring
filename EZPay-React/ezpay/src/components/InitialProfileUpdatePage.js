@@ -46,7 +46,7 @@ export default function InitialProfileUpdatePage() {
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mobileNumber }),
+        body: JSON.stringify({ "mobileNumber":mobileNumber }),
       },
     );
     return response.ok;
@@ -60,7 +60,7 @@ export default function InitialProfileUpdatePage() {
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ "email":email }),
       },
     );
     return response.ok;

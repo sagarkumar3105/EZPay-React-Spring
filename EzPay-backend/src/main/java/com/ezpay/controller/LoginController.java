@@ -25,16 +25,27 @@ public class LoginController {
 	
 	// calls login service to check if userid already in use.
 	@PutMapping("/check_user_id")
-	public ResponseEntity<String> checkUserId(@RequestBody JsonNode payload){
-		if (loginService.checkUserId(payload.get("userId").asText() )){
-			return ResponseEntity.status(400).body("User ID already exists");
-		} else {
-			return ResponseEntity.ok("User ID not present ");
-		}
-	}
+    public ResponseEntity<Map<String, String>> checkUserId(@RequestBody JsonNode payload) {
+        //logger.info("Received request to check user ID: {}", payload);
+
+        // Validate that the userId is present
+        if (!payload.has("userId")) {
+            return ResponseEntity.badRequest().body(Map.of("message", "User ID is required"));
+        }
+
+        String userId = payload.get("userId").asText();
+        
+        if (loginService.checkUserId(userId)) {
+            return ResponseEntity.status(400).body(Map.of("message", "User ID already exists"));
+        } else {
+            return ResponseEntity.ok(Map.of("message", "User ID not present"));
+        }
+    }
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> loginUser(@RequestBody JsonNode payload) {
-	    String userId = payload.get("userId").asText();
+		//System.out.println("--------------->"+"Got here 2");
+
+		String userId = payload.get("userId").asText();
 	    String password = payload.get("password").asText();
 		boolean isLoggedIn = loginService.authenticate(userId, password);
         

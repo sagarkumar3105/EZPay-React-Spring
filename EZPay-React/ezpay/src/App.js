@@ -10,7 +10,7 @@ import PrivateRoute from './components/PrivateRoute';
 import ViewProfile from './components/ViewProfile';
 import PasswordRecovery from './components/PasswordRecovery';
 import PasswordReset from './components/PasswordReset';
-import ProfileUpdate from './components/ProfileUpdate'; // Import your Update Profile component
+import UpdateProfile from './components/UpdateProfile'; // Import your Update Profile component
 
 function App() {
   return (
@@ -48,7 +48,7 @@ function App() {
           {/* Add the new Update Profile route here */}
           <Route path="/update-profile" element={
             <PrivateRoute>
-              <ProfileUpdate />
+              <UpdateProfile />
             </PrivateRoute>
           } />
         </Routes>

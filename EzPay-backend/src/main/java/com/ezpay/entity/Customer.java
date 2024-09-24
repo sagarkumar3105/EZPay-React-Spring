@@ -56,7 +56,7 @@ public class Customer {
     private LocalDateTime profileLastUpdatedDate;
 
     @Column(name = "profile_picture_URL") // Mapping profilePictureUrl to "profile_picture_URL"
-    private byte[] profilePictureUrl; // Changed to byte[] for BLOB data type
+    private String profilePictureUrl; // Changed to byte[] for BLOB data type
 
     @Column(name = "is_profile_info_set", nullable = false) // Mapping isProfileInfoSet to "is_profile_info_set"
     private Boolean isProfileInfoSet;
@@ -156,11 +156,11 @@ public class Customer {
 		this.profileLastUpdatedDate = profileLastUpdatedDate;
 	}
 
-	public byte[] getProfilePictureUrl() {
+	public String getProfilePictureUrl() {
 		return profilePictureUrl;
 	}
 
-	public void setProfilePictureUrl(byte[] profilePictureUrl) {
+	public void setProfilePictureUrl(String profilePictureUrl) {
 		this.profilePictureUrl = profilePictureUrl;
 	}
 
@@ -201,7 +201,7 @@ public class Customer {
 		return "Customer [customerId=" + customerId + ", name=" + name + ", email=" + email + ", mobileNumber="
 				+ mobileNumber + ", address=" + address + ", dob=" + dob + ", gender=" + gender
 				+ ", profileCreationDate=" + profileCreationDate + ", profileLastUpdatedDate=" + profileLastUpdatedDate
-				+ ", profilePictureUrl=" + Arrays.toString(profilePictureUrl) + ", isProfileInfoSet=" + isProfileInfoSet
+				+ ", profilePictureUrl=" + profilePictureUrl + ", isProfileInfoSet=" + isProfileInfoSet
 				+ ", upiId=" + upiId + ", bankAccountNumber=" + bankAccountNumber + ", ifscCode=" + ifscCode
 				+ ", accountType=" + accountType + "]";
 	}

@@ -66,6 +66,7 @@ export default function InitialProfileUpdatePage() {
     return response.ok;
   };
   const validateSubmit = async (profileData) => {
+    console.log(profileData);
     const response = await fetch(
       "http://localhost:8005/api/add-profile-details",
       {
@@ -98,6 +99,7 @@ export default function InitialProfileUpdatePage() {
       <div className="profile-update-container">
         <form
           onSubmit={handleSubmit((data) => {
+            
             validateSubmit(data);
           })}
           className="profile-update-form"

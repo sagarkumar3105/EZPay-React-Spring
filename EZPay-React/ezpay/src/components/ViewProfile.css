@@ -80,3 +80,28 @@ h1 {
       grid-template-columns: 1fr; /* Stack on small screens */
   }
 }
+
+.profile-picture-container {
+  display: flex;
+  align-items: center; /* Align items vertically center */
+  margin-top: 20px;
+}
+
+.profile-picture {
+  width: 75px; /* Small square size */
+  height: 75px; /* Small square size */
+  object-fit: cover; /* Maintain aspect ratio */
+  border: 1px solid #ccc; /* Optional border */
+  margin-left: 50px; /* Increased space between text and image */
+}
+
+.profile-picture-placeholder {
+  width: 80px; /* Small square size */
+  height: 80px; /* Small square size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc; /* Optional border */
+  margin-left: 15px; /* Increased space between text and placeholder */
+  color: #888; /* Placeholder text color */
+}

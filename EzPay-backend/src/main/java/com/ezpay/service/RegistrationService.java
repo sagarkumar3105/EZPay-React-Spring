@@ -73,7 +73,7 @@ public class RegistrationService {
         customer.setDob(dob);
         
         customer.setGender(payload.get("gender").asText());
-        customer.setProfilePictureUrl(payload.get("profilePictureUrl").asText().getBytes()); 
+        customer.setProfilePictureUrl(payload.get("profilePictureUrl").asText()); 
         customer.setIsProfileInfoSet(true); 
         
         String upiId=payload.get("mobileNumber").asText()+"@ezpay";

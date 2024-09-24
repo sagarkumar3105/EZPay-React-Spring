@@ -1,38 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import "./ViewProfile.css"
+import "./ViewProfile.css";
+
 function Profile() {
   const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
     const fetchProfileData = async () => {
-    const customerId = localStorage.getItem('customerId');
-    if (!customerId) {
-    // Redirect to login if customerId is not present
-    window.location.href = '/login';
-    return;
-    }
+      const customerId = localStorage.getItem('customerId');
+      if (!customerId) {
+        window.location.href = '/login';
+        return;
+      }
 
-    const response = await fetch(`http://localhost:8005/api/view-profile`, {
+      const response = await fetch(`http://localhost:8005/api/view-profile`, {
         method: 'GET',
         headers: {
-        'Content-Type': 'application/json',
-        'Key': customerId // Send customerId in headers
-
+          'Content-Type': 'application/json',
+          'Key': customerId // Send customerId in headers
         },
-    });
+      });
 
-    if (!response.ok) {
+      if (!response.ok) {
         throw new Error('Failed to fetch profile data');
-    }
+      }
 
-    const data = await response.json();
-    setProfileData(data);
+      const data = await response.json();
+      setProfileData(data);
+      console.table(profileData)
+
     };
 
     fetchProfileData();
   }, []);
 
-  console.log(profileData)
+  const isValidImage = (url) => {
+    return url && (url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png') || url.endsWith('.gif'));
+  };
+
   return (
     <div className="profile-container">
       <h1>Profile Details</h1>
@@ -45,12 +49,22 @@ function Profile() {
           <div><strong>Address:</strong> {profileData.address}</div>
           <div><strong>Date of Birth:</strong> {profileData.dob.split('T')[0]}</div>
           <div><strong>Gender:</strong> {profileData.gender}</div>
-          <div><strong>Profile Picture URL:</strong> {profileData.profilePictureUrl===null? "Not Given" :profileData.profilePictureUrl}</div>
-
-
           <div><strong>Bank Account Number:</strong> {profileData.bankAccountNumber}</div>
           <div><strong>IFSC Code:</strong> {profileData.ifscCode}</div>
-          <div><strong>Account Type:</strong> {profileData.accountType === '1' ? 'Savings Account' : "Current Account"}</div>
+          <div><strong>Account Type:</strong> {profileData.accountType === 1 ? 'Savings Account' : "Current Account"}</div>
+          
+          <div className="profile-picture-container">
+            <strong>Profile Picture:</strong>
+            {isValidImage(profileData.profilePictureUrl) ? (
+              <img 
+                src={profileData.profilePictureUrl} 
+                alt="Profile" 
+                className="profile-picture"
+              />
+            ) : (
+              <div className="profile-picture-placeholder">Image not Rendered</div>
+            )}
+          </div>
         </div>
       ) : (
         <p>No profile data available</p>

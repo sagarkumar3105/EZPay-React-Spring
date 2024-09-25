@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/customers")
 @CrossOrigin(origins = "http://localhost:3000")
-public class ProfileManagementController {
+public class ProfileUpdateController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProfileManagementController.class);
 

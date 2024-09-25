@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ezpay.entity.*;
 //Modify ProfileManagementRepository to return Optional<Customer>
-public interface ProfileManagementRepository extends JpaRepository<Customer,Integer>{
+public interface ProfileUpdateRepository extends JpaRepository<Customer,Integer>{
 	
 
 	   // @Modifying

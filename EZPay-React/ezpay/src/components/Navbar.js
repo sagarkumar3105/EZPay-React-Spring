@@ -2,6 +2,9 @@ import React from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate, Link } from 'react-router-dom';
 import './Navbar.css'; // Import the CSS
+import ezpayLogo from "../assets/images/EZPAY-LOGO.png";
+import userHead from "../assets/images/userIcon.png";
+
 
 function Navbar() {
   const navigate = useNavigate();
@@ -22,7 +25,10 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">EZPay</Link>
+        <Link className="navbar-brand" to="/">
+          <img src={ezpayLogo} alt="Logo" className="brand-logo-image" />
+          EZPay
+        </Link>
 
         <button
           className="navbar-toggler"
@@ -61,6 +67,7 @@ function Navbar() {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
+              <img src={userHead} className='user-logo'/>
               Profile
             </button>
 

@@ -60,7 +60,7 @@ localStorage.clear()
   }
   return (
     <>
-     <h1>Hello Dear Customer</h1>
+     <h1 className="welcome-title">Hello Dear Customer</h1>
       <div className="form-container">
        
         <form onSubmit={handleSubmit}>

@@ -71,7 +71,7 @@ export default function Register() {
 
   return (
     <>
-      <h1>Registration Page</h1>
+      <h1 className="welcome-title">Registration Page</h1>
       <div className="user-registration">
         <form onSubmit={handleSubmit(onSubmit)} className="register-form">
           <div className="form-group">

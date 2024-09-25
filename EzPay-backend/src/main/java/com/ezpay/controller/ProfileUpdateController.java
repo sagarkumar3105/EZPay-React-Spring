@@ -1,12 +1,14 @@
 package com.ezpay.controller;
 
 import org.slf4j.Logger;
+
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.ezpay.service.ProfileManagementService;
+import com.ezpay.service.ProfileUpdateService;
 import com.ezpay.entity.Customer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +17,12 @@ import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/customers")
 @CrossOrigin(origins = "http://localhost:3000")
-public class ProfileManagementController {
+public class ProfileUpdateController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProfileManagementController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProfileUpdateController.class);
 
     @Autowired
-    private ProfileManagementService customerService;
+    private ProfileUpdateService customerService;
 
     // Fetch a customer by ID
     @GetMapping("/by-id/{id}")
@@ -62,7 +64,8 @@ public class ProfileManagementController {
             existingCustomer.setEmail(updatedCustomer.getEmail());
             existingCustomer.setMobileNumber(updatedCustomer.getMobileNumber());
             existingCustomer.setAddress(updatedCustomer.getAddress());
-            //existingCustomer.setProfileLastUpdatedDate(LocalDateTime.now());  // Example of updating timestamp
+            existingCustomer.setProfilePictureUrl(updatedCustomer.getProfilePictureUrl());
+            existingCustomer.setProfileLastUpdatedDate(LocalDateTime.now());  // Example of updating timestamp
             
             // Save updated customer
             customerService.saveCustomer(existingCustomer);

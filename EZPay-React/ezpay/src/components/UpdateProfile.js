@@ -8,14 +8,14 @@ const UpdateProfile = () => {
     email: '',
     mobileNumber: '',
     address: '',
-    profilePictureURL: '',
+    profilePictureUrl: '',
   });
   const [newValues, setNewValues] = useState({
     newName: '',
     newEmail: '',
     newMobileNumber: '',
     newAddress: '',
-    newProfilePictureURL: '',
+    newprofilePictureUrl: '',
   });
   const [changedFields, setChangedFields] = useState({});
   const [message, setMessage] = useState('');
@@ -39,8 +39,9 @@ const UpdateProfile = () => {
           email: data.email || '',
           mobileNumber: data.mobileNumber || '',
           address: data.address || '',
-          profilePictureURL: data.profilePictureURL || '',
+          profilePictureUrl: data.profilePictureUrl || '',
         });
+        // console.log(data)
       } catch (error) {
         console.error('Error fetching customer data:', error);
         setMessage('Error fetching data');
@@ -93,7 +94,7 @@ const UpdateProfile = () => {
           email: newValues.newEmail || formData.email,
           mobileNumber: newValues.newMobileNumber || formData.mobileNumber,
           address: newValues.newAddress || formData.address,
-          profilePictureURL: newValues.newProfilePictureURL || formData.profilePictureURL,
+          profilePictureUrl: newValues.newprofilePictureUrl || formData.profilePictureUrl,
         };
 
         // Update customer details
@@ -126,7 +127,7 @@ const UpdateProfile = () => {
 
   return (
     <div className="container">
-      <h2>Update Profile</h2>
+      <h2 className="welcome-title">Update Profile</h2>
       {message && <div className="message">{message}</div>}
       <form onSubmit={handleSubmit}>
         <div className="input-container">
@@ -177,11 +178,11 @@ const UpdateProfile = () => {
           <label>Profile Picture URL:</label>
           <input
             type="text"
-            name="newProfilePictureURL"
-            value={newValues.newProfilePictureURL} // Start empty
+            name="newprofilePictureUrl"
+            value={newValues.newprofilePictureUrl} // Start empty
             onChange={handleChange}
-            placeholder={formData.profilePictureURL} // Show current profile picture URL as a placeholder
-            style={getInputStyle('newProfilePictureURL')}
+            placeholder={formData.profilePictureUrl} // Show current profile picture URL as a placeholder
+            style={getInputStyle('newprofilePictureUrl')}
           />
         </div>
         <button className="button" type="submit">Update Profile</button>

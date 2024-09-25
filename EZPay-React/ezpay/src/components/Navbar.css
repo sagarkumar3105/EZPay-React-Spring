@@ -1,50 +1,86 @@
 .navbar {
-    background-color: #f8f9fa; /* Light gray background */
+    background-color: #34495E; /* Light gray background */
     border-bottom: 2px solid #e1e1e1; /* Subtle bottom border */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow */
 }
 
+.brand-logo-image {
+    width: 40px; /* Adjust the size as needed */
+    height: 40px; /* Maintain a square for circular shape */
+    border-radius: 50%; /* Make it circular */
+    margin-right: 8px; /* Spacing between logo and text */
+    vertical-align: middle; /* Align with text */
+    transition: transform 0.3s ease; /* Smooth animation for transform */
+}
+
+/* Animation on hover */
+.brand-logo-image:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+
+.user-logo {
+    width: 30px; /* Adjust the size as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Make it circular */
+    margin-right: 5px; /* Spacing between logo and text */
+    vertical-align: middle; /* Align with text */
+}
+
+
 .navbar-brand {
     font-size: 1.8em;
     font-weight: bold;
-    color: #c74d4d; /* Faded red */
+    color: #D1F2EB; 
     transition: color 0.3s;
 }
 
 .navbar-brand:hover {
-    color: #a33a3a; /* Darker shade on hover */
+    color: #c0e4dc; 
+}
+/* Animation on hover */
+.brand-logo-container:hover .brand-logo-image {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.brand-logo-container:hover .navbar-brand {
+    transform: translateY(-2px); /* Move the text up on hover */
+}
+
+.navbar-brand {
+    transition: transform 0.3s ease; /* Smooth animation for text */
 }
 
 .nav-link {
-    color: #6c757d; /* Default text color */
+    color: #34495E; /* Primary color */
     margin-right: 20px;
     font-weight: 500;
     transition: color 0.3s;
 }
 
 .nav-link:hover {
-    color: #c74d4d; /* Change color on hover */
+    color: #D1F2EB; /* Secondary color on hover */
 }
 
 .dropdown-toggle {
-    background-color: #c74d4d; /* Faded red */
+    background-color: #D1F2EB; /* Secondary color */
     border: none;
-    color: white;
+    color: #34495E; /* Primary color */
     transition: background-color 0.3s;
 }
 
 .dropdown-toggle:hover {
-    background-color: #a33a3a; /* Darker shade on hover */
+    background-color: #A3D9D2; /* Slightly darker shade on hover */
 }
 
 .dropdown-item {
-    color: #333; /* Dark text color */
+    color: #34495E; /* Primary text color */
     transition: background-color 0.3s;
 }
 
 .dropdown-item:hover {
-    background-color: #f8d7da; /* Light faded pink */
-    color: #c74d4d; /* Faded red */
+    background-color: #D1F2EB; /* Secondary color on hover */
+    color: #34495E; /* Primary text color */
 }
 
 .container-fluid {
@@ -58,22 +94,21 @@
 }
 
 .dropdown-menu {
-    background-color: #f8d7da; /* Light pink background */
-    border: 1px solid #c74d4d; /* Faded red border */
+    background-color: #D1F2EB; /* Secondary light background */
+    border: 1px solid #34495E; /* Primary border color */
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
 .dropdown-item {
-    color: #333; /* Dark text color */
+    color: #34495E; /* Primary text color */
     padding: 10px 20px; /* More padding for clickable area */
     transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-    
 }
 
 .dropdown-item:hover {
-    background-color: #c74d4d; /* Faded red on hover */
-    color: white; /* White text on hover */
+    background-color: #34495E; /* Primary color on hover */
+    color: #D1F2EB; /* Secondary text color on hover */
 }
 
 .dropdown-divider {

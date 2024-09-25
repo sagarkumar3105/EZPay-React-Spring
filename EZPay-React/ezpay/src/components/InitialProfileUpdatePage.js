@@ -105,7 +105,7 @@ export default function InitialProfileUpdatePage() {
   };
   return (
     <>
-      <h1>Complete Your Profile</h1>
+      <h1 className="welcome-title">Complete Your Profile</h1>
       <div className="profile-update-container">
         <form
           onSubmit={handleSubmit((data) => {

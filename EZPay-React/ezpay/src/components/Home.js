@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <>
-    <h1>Welcome to Ezpay!!</h1>
+    <h1 className="welcome-title">Welcome to Ezpay!!</h1>
       <div className="card-container">
         <div className="new-user card" onClick={() => navigate("/register")}>
           <h5>New User</h5>

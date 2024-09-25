@@ -112,3 +112,89 @@ h2 {
     padding: 15px;
   }
 }
+
+/* New Validation Styles Added Below */
+
+/* For validation errors */
+.validation-error {
+  color: red;
+  font-size: 14px;
+}
+
+/* Popup boxes for validation errors */
+.popup-box {
+  position: absolute;
+  top: -20px; /* Adjust the position above the input field */
+  left: 0;
+  background-color: red;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.popup-box::after {
+  content: '';
+  position: absolute;
+  top: 100%; /* Arrow pointing down */
+  left: 20px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: red transparent transparent transparent;
+}
+
+.popup-boxx {
+  position: absolute;
+  top: -40px; /* Adjust the position above the input field */
+  left: 0;
+  background-color: red;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.popup-boxx::after {
+  content: '';
+  position: absolute;
+  top: 100%; /* Arrow pointing down */
+  left: 20px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: red transparent transparent transparent;
+}
+
+/* Error message for failed updates */
+.message-error {
+  color: red;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.message {
+  font-size: 22px;
+  font-weight: bold;
+  color: #4CAF50; /* Green for success */
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: rgba(235, 255, 235, 0.8); /* Light green background */
+  border-radius: 5px;
+  text-align: center;
+}
+
+.message-error {
+  font-size: 22px;
+  font-weight: bold;
+  color: #d32f2f; /* Red color to indicate an error */
+  margin-top: 15px;
+  padding: 10px;
+  background-color: rgba(255, 235, 235, 0.8);
+  border-radius: 5px;
+  text-align: center;
+}

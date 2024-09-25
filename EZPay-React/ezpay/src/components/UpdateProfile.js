@@ -86,15 +86,15 @@ const UpdateProfile = () => {
             return; // Stop further execution if password verification fails
         }
 
-        // Prepare updated data
-        const updatedData = {};
-
-        // Only include fields that have been changed
-        if (changedFields.newName) updatedData.name = newValues.newName;
-        if (changedFields.newEmail) updatedData.email = newValues.newEmail;
-        if (changedFields.newMobileNumber) updatedData.mobileNumber = newValues.newMobileNumber;
-        if (changedFields.newAddress) updatedData.address = newValues.newAddress;
-        if (changedFields.newProfilePictureURL) updatedData.profilePictureURL = newValues.newProfilePictureURL;
+        // Prepare updated data - Only changed fields
+        const updatedData = {
+          customerId,
+          name: newValues.newName || formData.name, // Fallback to existing values if the input is not changed
+          email: newValues.newEmail || formData.email,
+          mobileNumber: newValues.newMobileNumber || formData.mobileNumber,
+          address: newValues.newAddress || formData.address,
+          profilePictureURL: newValues.newProfilePictureURL || formData.profilePictureURL,
+        };
 
         // Update customer details
         const updateResponse = await fetch(`http://localhost:8005/customers/update?customerId=${customerId}`, {
@@ -113,7 +113,6 @@ const UpdateProfile = () => {
 
         setMessage('Profile updated successfully!');
         setShowPasswordModal(false); // Close modal after update
-        // Reset states as needed
 
     } catch (error) {
         console.error('Error during update:', error);
@@ -131,57 +130,57 @@ const UpdateProfile = () => {
       {message && <div className="message">{message}</div>}
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label>Name: <span className="old-value">{formData.name}</span></label>
+          <label>Name:</label>
           <input
             type="text"
             name="newName"
-            value={newValues.newName} // Controlled input for new value
+            value={newValues.newName} // Start empty, the user can type or leave it blank
             onChange={handleChange}
-            placeholder="Enter new name"
+            placeholder={formData.name} // Show current name as a placeholder
             style={getInputStyle('newName')}
           />
         </div>
         <div className="input-container">
-          <label>Email: <span className="old-value">{formData.email}</span></label>
+          <label>Email:</label>
           <input
             type="email"
             name="newEmail"
-            value={newValues.newEmail} // Controlled input for new value
+            value={newValues.newEmail} // Start empty, the user can type or leave it blank
             onChange={handleChange}
-            placeholder="Enter new email"
+            placeholder={formData.email} // Show current email as a placeholder
             style={getInputStyle('newEmail')}
           />
         </div>
         <div className="input-container">
-          <label>Mobile Number: <span className="old-value">{formData.mobileNumber}</span></label>
+          <label>Mobile Number:</label>
           <input
             type="text"
             name="newMobileNumber"
-            value={newValues.newMobileNumber} // Controlled input for new value
+            value={newValues.newMobileNumber} // Start empty
             onChange={handleChange}
-            placeholder="Enter new mobile number"
+            placeholder={formData.mobileNumber} // Show current mobile number as a placeholder
             style={getInputStyle('newMobileNumber')}
           />
         </div>
         <div className="input-container">
-          <label>Address: <span className="old-value">{formData.address}</span></label>
+          <label>Address:</label>
           <input
             type="text"
             name="newAddress"
-            value={newValues.newAddress} // Controlled input for new value
+            value={newValues.newAddress} // Start empty
             onChange={handleChange}
-            placeholder="Enter new address"
+            placeholder={formData.address} // Show current address as a placeholder
             style={getInputStyle('newAddress')}
           />
         </div>
         <div className="input-container">
-          <label>Profile Picture URL: <span className="old-value">{formData.profilePictureURL}</span></label>
+          <label>Profile Picture URL:</label>
           <input
             type="text"
             name="newProfilePictureURL"
-            value={newValues.newProfilePictureURL} // Controlled input for new value
+            value={newValues.newProfilePictureURL} // Start empty
             onChange={handleChange}
-            placeholder="Enter new profile picture URL"
+            placeholder={formData.profilePictureURL} // Show current profile picture URL as a placeholder
             style={getInputStyle('newProfilePictureURL')}
           />
         </div>

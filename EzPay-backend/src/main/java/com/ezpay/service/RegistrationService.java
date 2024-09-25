@@ -101,4 +101,7 @@ public class RegistrationService {
 		List<Customer> customers = masterDataRepository.findByMobileNumber(payload.get("mobileNumber").asText());
 		return customers.isEmpty();
 	}
+	public boolean checkBankAccountExists(JsonNode payload){
+		return masterDataRepository.findByBankAccountNumber(payload.findValue("accountNumber").asText()).isEmpty();
+	}
 }

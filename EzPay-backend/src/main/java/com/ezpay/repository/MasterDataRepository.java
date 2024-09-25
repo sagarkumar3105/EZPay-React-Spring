@@ -17,4 +17,5 @@ public interface MasterDataRepository extends JpaRepository<Customer, Long> {
 	List<Customer> findByEmail(String email);
 	
 	List<Customer> findByMobileNumber(String mobileNumber);
+	List<Customer> findByBankAccountNumber(String bankAccountNumber);
 }

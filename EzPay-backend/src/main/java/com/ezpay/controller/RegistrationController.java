@@ -35,14 +35,14 @@ public class RegistrationController {
 	    System.out.println("Received request to check email: " + payload);
 		JsonNode value = payload.findValue("email");
 		if (value==null){
-			return ResponseEntity.status(402).body("the value provided is null");
+			return ResponseEntity.status(562).body("the value provided is null");
 		}
 		
 		if (registrationService.checkEmailExists(payload) ){
 			return ResponseEntity.ok("Email does not exist");
 		}
 		else {
-			return ResponseEntity.status(401).body("Email already registered");
+			return ResponseEntity.status(561).body("Email already registered");
 		}
 	}
 	
@@ -50,15 +50,32 @@ public class RegistrationController {
 	public ResponseEntity<String> checkMobileNumber(@RequestBody JsonNode payload){
 		JsonNode value = payload.findValue("mobileNumber");
 		if (value==null){
-			return ResponseEntity.status(402).body("the value provided is null");
+			return ResponseEntity.status(562).body("the value provided is null");
 		}
 		if (registrationService.checkMobileNumberExists(payload) ){
 			return ResponseEntity.ok("Mobile number does not exist");
 		}
 		else {
-			return ResponseEntity.status(401).body("Mobile number already registered");
+			return ResponseEntity.status(561).body("Mobile number already registered");
 		}
 	}
+	
+	@PutMapping("/check_if_bankacc_present")
+	public ResponseEntity<String> checkBankAccount(@RequestBody JsonNode payload){
+		JsonNode value = payload.findValue("accountNumber");
+		if(value==null){
+			return ResponseEntity.status(562).body("the value provided is null");
+		}
+		if(registrationService.checkBankAccountExists(payload)){
+			return ResponseEntity.ok("Bank account does not exist");
+		}
+		else {
+			return ResponseEntity.status(561).body("Bank account already registered");
+		}
+	}
+	
+	
+	
 	@PutMapping("/add-profile-details")
 	public ResponseEntity<String> addProfileDetails(@RequestBody JsonNode payload) {
 	    

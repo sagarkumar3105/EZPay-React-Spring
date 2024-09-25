@@ -46,11 +46,22 @@ export default function InitialProfileUpdatePage() {
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ "mobileNumber":mobileNumber }),
+        body: JSON.stringify({ mobileNumber: mobileNumber }),
       },
     );
     return response.ok;
   }
+  const validateAccountNumber = async (accountNumber) => {
+    const response = await fetch(
+      "http://localhost:8005/api/check_if_bankacc_present",
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ accountNumber: accountNumber }),
+      },
+    );
+    return response.ok;
+  };
 
   //console.log(watch());
   //console.log(errors);
@@ -60,7 +71,7 @@ export default function InitialProfileUpdatePage() {
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ "email":email }),
+        body: JSON.stringify({ email: email }),
       },
     );
     return response.ok;
@@ -79,27 +90,25 @@ export default function InitialProfileUpdatePage() {
     );
 
     if (response.ok) {
-      localStorage.setItem("isProfileInfoSet",true)
+      localStorage.setItem("isProfileInfoSet", true);
       navigate("/profileHome"); // Redirect to profile page after successful update
     } else {
       const errorMsg = await response.text();
       Swal.fire({
-        title: 'Failed!',
-        text: 'Profile Update Failed',
-        icon: 'error',
-        confirmButtonText: 'Okay',
-      });//("Profile update failed: " + errorMsg);
+        title: "Failed!",
+        text: "Profile Update Failed",
+        icon: "error",
+        confirmButtonText: "Okay",
+      }); //("Profile update failed: " + errorMsg);
       console.log(profileData);
     }
   };
   return (
     <>
-      
       <h1>Complete Your Profile</h1>
       <div className="profile-update-container">
         <form
           onSubmit={handleSubmit((data) => {
-            
             validateSubmit(data);
           })}
           className="profile-update-form"
@@ -259,12 +268,19 @@ export default function InitialProfileUpdatePage() {
                   value: /^\d{9,18}$/,
                   message: "Invalid Bank Account Number",
                 },
+                validate: validateAccountNumber,
               })}
               className={`form-input ${errors?.bankAccountNumber ? "error" : ""}`}
             />
             {errors?.bankAccountNumber && (
               <p className="error-message">
                 {errors.bankAccountNumber.message}
+              </p>
+            )}
+            {errors?.bankAccountNumber?.type === "validate" && (
+              <p className="error-message">
+                This bank account has already registered, please use some other
+                account.
               </p>
             )}
           </div>
@@ -285,7 +301,7 @@ export default function InitialProfileUpdatePage() {
               {...register("ifscCode", {
                 required: "Enter IFSC Code",
                 pattern: {
-                  value: /^[A-Za-z]{3}[A-Z0-9a-z]{8}$/,
+                  value: /^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/,
                   message: "Invalid IFSC Code",
                 },
               })}
@@ -322,4 +338,3 @@ export default function InitialProfileUpdatePage() {
     </>
   );
 }
-

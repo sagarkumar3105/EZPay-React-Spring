@@ -45,7 +45,7 @@ public class SecurityConfig {
             .and()
             .csrf().disable()  // Disable CSRF protection for non-browser clients
             .authorizeRequests()
-            	.requestMatchers("/api/check_user_id","/api/check_if_email_present", "/api/check_if_mobile_present").permitAll()
+            	.requestMatchers("/api/check_user_id","/api/check_if_email_present", "/api/check_if_mobile_present","/api/check_if_bankacc_present").permitAll()
             	.requestMatchers("/api/login", "/api/register-user").permitAll()	//Allow access to Login APIs
                 .requestMatchers("/api/password/forgot", "/api/password/reset").permitAll() // Allow access to password recovery APIs
                 //Allow access for profile updates

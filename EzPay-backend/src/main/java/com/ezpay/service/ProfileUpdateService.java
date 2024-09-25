@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import com.ezpay.entity.Customer;
 import com.ezpay.entity.LoginData;
 import com.ezpay.repository.LoginDataRepository;
-import com.ezpay.repository.ProfileManagementRepository;
+import com.ezpay.repository.ProfileUpdateRepository;
 import com.ezpay.utils.PasswordUtils;
 @Service
-public class ProfileManagementService {
+public class ProfileUpdateService {
     @Autowired
-    private ProfileManagementRepository customerRepository;
+    private ProfileUpdateRepository customerRepository;
     @Autowired
     private LoginDataRepository loginDataRepository;
 

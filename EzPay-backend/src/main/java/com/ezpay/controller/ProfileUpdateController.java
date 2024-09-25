@@ -6,7 +6,7 @@ import java.util.Map;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.ezpay.service.ProfileManagementService;
+import com.ezpay.service.ProfileUpdateService;
 import com.ezpay.entity.Customer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +15,12 @@ import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/customers")
 @CrossOrigin(origins = "http://localhost:3000")
-public class ProfileManagementController {
+public class ProfileUpdateController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProfileManagementController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProfileUpdateController.class);
 
     @Autowired
-    private ProfileManagementService customerService;
+    private ProfileUpdateService customerService;
 
     // Fetch a customer by ID
     @GetMapping("/by-id/{id}")

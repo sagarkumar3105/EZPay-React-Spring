@@ -22,6 +22,8 @@ const UpdateProfile = () => {
   const [password, setPassword] = useState('');
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [passwordError, setPasswordError] = useState('');
+  const [errors, setErrors] = useState({});
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -129,7 +131,7 @@ const UpdateProfile = () => {
     <div className="container">
       <h2 className="welcome-title">Update Profile</h2>
       {message && <div className="message">{message}</div>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="updateForm">
         <div className="input-container">
           <label>Name:</label>
           <input
@@ -185,8 +187,8 @@ const UpdateProfile = () => {
             style={getInputStyle('newprofilePictureUrl')}
           />
         </div>
-        <button className="button" type="submit">Update Profile</button>
-        <button type="button" className="button" onClick={() => navigate('/view-profile')}>Cancel</button>
+        <button className="submit-button" type="submit">Update Profile</button>
+        <button type="button" className="cancel-button" onClick={() => navigate('/view-profile')}>Cancel</button>
       </form>
 
       {showPasswordModal && (

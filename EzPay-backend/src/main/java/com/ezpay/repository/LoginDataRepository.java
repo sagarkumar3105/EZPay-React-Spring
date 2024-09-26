@@ -14,4 +14,6 @@ import com.ezpay.entity.LoginData;
 public interface LoginDataRepository extends JpaRepository<LoginData, String> {
 	Optional<LoginData> findByUserId(String userId);
     Optional<LoginData> findByCustomer(Customer customer);
+    //UC5 added this
+     LoginData findByCustomerCustomerId(Long customerId);
 }

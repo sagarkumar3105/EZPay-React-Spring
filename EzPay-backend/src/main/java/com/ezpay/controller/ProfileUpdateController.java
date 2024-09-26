@@ -25,12 +25,20 @@ public class ProfileUpdateController {
     @Autowired
     private ProfileUpdateService customerService;
 
+    @Autowired
+    private KeyService keyService;
+
     // Fetch a customer by ID
     @GetMapping("/by-id/{id}")
     public Customer getCustomerById(@PathVariable Long id) {
         logger.info("Fetching customer with ID: {}", id);
         Customer customer = customerService.getCustomerById(id);
         logger.info("Fetched customer details: {}", customer);
+        
+        //statements Added by UC5
+        //-> No need to store address with encryption //customer.setAddress(keyService.decryptText(customer.getAddress(),id));
+        customer.setBankAccountNumber(keyService.decryptText(customer.getBankAccountNumber(),id));
+        
         return customer;
     }
     

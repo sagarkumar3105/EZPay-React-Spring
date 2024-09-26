@@ -25,17 +25,19 @@ public class LoginData {
     @JoinColumn(name = "customer_id", unique = true, foreignKey = @ForeignKey(name = "FK_customer_login"))
     private Customer customer; // Links login data to the customer entity
 	
+    @ManyToOne
+    @JoinColumn(name = "blocked_code", referencedColumnName="block_id",nullable = false)
+    private SuspiciousActivity suspiciousActivity;
+
     
-//    @Column(name="customer_id")
-//    private Long customerId;
-//         
-//    public Long getCustomerId() {
-//		return customerId;
-//	}
-//
-//	public void setCustomerId(Long customerId) {
-//		this.customerId = customerId;
-//	}
+     public SuspiciousActivity getSuspiciousActivity() {
+	     return suspiciousActivity;
+	}
+	
+	public void setSuspiciousActivity(SuspiciousActivity suspiciousActivity) {
+		this.suspiciousActivity = suspiciousActivity;
+	}
+
 
 	@Column(name = "password_hash", nullable = false)
     private String passwordHash; // Changed to byte[] to match RAW(64)
@@ -77,11 +79,4 @@ public class LoginData {
         this.passwordHash = passwordHash;
     }
 
-    public Integer getBlockedCode() {
-        return blockedCode;
-    }
-
-    public void setBlockedCode(Integer blockedCode) {
-        this.blockedCode = blockedCode;
-    }
 }

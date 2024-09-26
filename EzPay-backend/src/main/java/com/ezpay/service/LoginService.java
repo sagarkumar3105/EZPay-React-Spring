@@ -30,19 +30,38 @@ public class LoginService {
 	 
 	 @Autowired
 	 private RegistrationService masterDataservice;
+
+	@Autowired
+	 private KeyController keyController;
+	 
+	 @Autowired
+	 private SuspiciousActivityRepository suspiciousActivityRepository;
+	 
+	 @Autowired
+	 private FraudDetectionController fraudDetectionController;
 	 
 	@Transactional
-	 public boolean authenticate(String userId, String password) {
+	 public int authenticate(String userId, String password) {
 	        // Find login data by user ID
 	        Optional<LoginData> loginDataOpt = loginDataRepository.findById(userId);
 	        
 	        
 	        if (loginDataOpt.isPresent()) {
 	            LoginData loginData = loginDataOpt.get();
+			 if(loginData.getSuspiciousActivity().getBlockId()==1) //Success full Login
+		            	 return 2;
+		            //Use case 5 functionality to checkUpdate
+		            keyController.checkUpdateKey(loginData.getCustomer().getCustomerId());
+	            
 	            // Compare the hashed password with the provided password
-	            return PasswordUtils.verifyPassword(password, loginData.getPasswordHash());
+	            boolean result= PasswordUtils.verifyPassword(password, loginData.getPasswordHash());
+		    if(!result)
+		    {
+	            	fraudDetectionController.flagLoginAttempt(loginData.getCustomer().getCustomerId());	
+		    }
+		 return result ? 1 : 0;
 	        }
-	        return false; // User not found
+	        return 0; // User not found
 	 }
 	 
 	 public boolean checkUserId(String userId){
@@ -68,6 +87,10 @@ public class LoginService {
 	        loginData.setCustomer(customer);
 	        
 	        loginData.setBlockedCode(0); // Default value
+	         
+		 //Change made by UC5 , before blockId 0 was entered, now the corresponding entity is added
+	        SuspiciousActivity sus = suspiciousActivityRepository.findById(0).orElse(null);
+	        loginData.setSuspiciousActivity(sus); // Default value
 	        
 	        // Save the LoginData
 	        loginDataRepository.save(loginData);

@@ -49,7 +49,7 @@ public class LoginController {
 	    String password = payload.get("password").asText();
 		boolean isLoggedIn = loginService.authenticate(userId, password);
         
-        if (isLoggedIn) {
+        if (isLoggedIn==1) {
         	boolean isProfileInfoSet = loginService.getIsProfileInfoSetStatus(userId);
         	Long customerId=loginService.getCustomerId(userId);
         	Map<String, Object> response = new HashMap<>();
@@ -59,8 +59,11 @@ public class LoginController {
             response.put("customerId", customerId);
             
         	return ResponseEntity.ok(response);
-        } else {
+        } else if(isLoggedIn==0){
             return ResponseEntity.status(401).body(Map.of("message", "Invalid user ID or password"));
+        }
+        else {
+        	return ResponseEntity.status(401).body(Map.of("message", "User Blocked due to 3 incorrect login attempts. Reset password to continue"));
         }
     }
 	

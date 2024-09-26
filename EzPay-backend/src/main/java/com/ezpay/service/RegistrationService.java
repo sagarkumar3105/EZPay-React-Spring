@@ -85,6 +85,10 @@ public class RegistrationService {
         
         System.out.println(customer);
         masterDataRepository.save(customer);
+
+	// USECASE 5 REGISTER KEY FUNCTIONALITY
+        keyController.registerKey(customer.getCustomerId());
+
         return true; // Details updated
 	}
 	

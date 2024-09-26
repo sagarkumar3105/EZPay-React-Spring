@@ -2,6 +2,8 @@ package com.ezpay.service;
 //author:Aman Rauth
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+
 import org.springframework.stereotype.Service;
 
 import com.ezpay.entity.Customer;
@@ -49,6 +51,19 @@ public class ProfileUpdateService {
     public Customer updateProfile(Customer customer) {
     	Customer existingProfile = customerRepository.findByCustomerId(customer.getCustomerId())
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
+    	
+    	 // Check if email already exists and belongs to another customer
+    	//Server side validation
+    	// Author:Sandarbha Komujwar
+        if (customerRepository.existsByEmailAndCustomerIdNot(customer.getEmail(), customer.getCustomerId())) {
+            throw new RuntimeException("Email already exists");
+        }
+
+        // Check if mobile number already exists and belongs to another customer
+        if (customerRepository.existsByMobileNumberAndCustomerIdNot(customer.getMobileNumber(), customer.getCustomerId())) {
+            throw new RuntimeException("Mobile number already exists");
+        }
+
         existingProfile.setName(customer.getName());
         existingProfile.setEmail(customer.getEmail());
         existingProfile.setMobileNumber(customer.getMobileNumber());
@@ -63,33 +78,3 @@ public class ProfileUpdateService {
     }
     
 }
-
-
-
-
-/*
-@Service
-public class ProfileManagementService {
-	@Autowired
-    private ProfileManagementRepository customerRepository;
-
-    public List<CustomerProjection> getCustomersByName(String name) {
-        return customerRepository.findByName(name);
-    }
-    public Customer addCustomer(Customer customer) {
-        return customerRepository.save(customer);
-    }
-
-    public int updateCustomerDetails(int customerId, String name, String email, String mobileNumber, String address, String ifscCode, String accNo) {
-        return customerRepository.updateCustomerDetails(customerId, name, email, mobileNumber, address, ifscCode, accNo);
-    }
-    //Author:SNehal
-    
-    public Customer getCustomerById(int customerId) {
-        return customerRepository.findCustomerById(customerId) 
-            .orElseThrow(() -> new RuntimeException("Customer not found"));
-    }
-
-
-}
-*/

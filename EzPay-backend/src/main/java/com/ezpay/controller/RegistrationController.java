@@ -29,6 +29,9 @@ public class RegistrationController {
 
 	@Autowired
 	private RegistrationService registrationService;
+
+	@Autowired
+    	private KeyService keyService;
 	
 	@PutMapping("/check_if_email_present")
 	public ResponseEntity<String> checkEmail(@RequestBody JsonNode payload){
@@ -88,10 +91,13 @@ public class RegistrationController {
 	@GetMapping("/view-profile")
 	public ResponseEntity<Customer> getProfile(@RequestHeader("Key") Long customerId)
 	{
-		System.out.println("---------->"+customerId);
+		//System.out.println("---------->"+customerId);
 	    Customer customer = registrationService.getCustomerProfile(customerId);
 	    if (customer != null) {
-	        return ResponseEntity.ok(customer);
+		    
+		    //UC5 added these 2 functions to ensure that decrypted values are printed to the user
+	            customer.setBankAccountNumber(keyService.decryptText(customer.getBankAccountNumber(),customerId));
+		    return ResponseEntity.ok(customer);
 	    } else {
 	        return ResponseEntity.status(404).body(null);
 	    }

@@ -34,6 +34,9 @@ public class PasswordRecoveryService {
 
 	@Autowired
 	private MasterDataRepository masterDataRepository;
+	
+	@Autowired
+	private SuspiciousActivityRepository suspiciousActivityRepository;
 
 	@Autowired
 	private PasswordRecoveryDetailsRepository passwordRecoveryDetailsRepository;
@@ -46,6 +49,9 @@ public class PasswordRecoveryService {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	FraudEntryRepository fraudEntryRepository;
 
 	@Value("${server.port}")
 	private String port;
@@ -164,8 +170,14 @@ public class PasswordRecoveryService {
 				LoginData loginData = loginDataOptional.get();
 				// Encrypt and set the new password for the customer
 				loginData.setPasswordHash(passwordEncoder.encode(newPassword));
-				loginData.setBlockedCode(0); // Reset blockedCode after password reset
+				  SuspiciousActivity sus = suspiciousActivityRepository.findById(0).orElse(null);
+		        	loginData.setSuspiciousActivity(sus); // Reset blockedCode after password reset
+
+				//loginData.setBlockedCode(0); // Reset blockedCode after password reset
 				loginDataRepository.save(loginData); // Save the updated password
+
+				//UseCase 5 functionality to set the values in fraudEntries to 1 where customer_id= loginData.Customer.customerId and loginData.suspiciousactivity.blockedCode=1
+				fraudEntryRepository.updateResolvedForCustomer(loginData.getCustomer().getCustomerId());
 
 				// Update the token's status to indicate it has been used and password reset is
 				// successful

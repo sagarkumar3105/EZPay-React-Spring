@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Column;
@@ -41,9 +42,6 @@ public class LoginData {
 
 	@Column(name = "password_hash", nullable = false)
     private String passwordHash; // Changed to byte[] to match RAW(64)
-
-    @Column(name = "blocked_code", nullable = false, columnDefinition = "NUMBER(1) DEFAULT 0")
-    private Integer blockedCode; // Added blockedCode field to match blocked_code column
 
     
     

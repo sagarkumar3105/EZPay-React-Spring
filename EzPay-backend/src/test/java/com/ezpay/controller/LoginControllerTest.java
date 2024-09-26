@@ -69,7 +69,7 @@ public class LoginControllerTest {
 				.put("userId", "user123")
 				.put("password", "password123");
 		
-		when(loginService.authenticate("user123", "password123")).thenReturn(true);
+		when(loginService.authenticate("user123", "password123")).thenReturn(1);
 		when(loginService.getIsProfileInfoSetStatus("user123")).thenReturn(true);
 		when(loginService.getCustomerId("user123")).thenReturn(1L);
 		
@@ -88,7 +88,7 @@ public class LoginControllerTest {
 				.put("userId", "user123")
 				.put("password", "wrongPassword");
 		
-		when(loginService.authenticate("user123", "wrongPassword")).thenReturn(false);
+		when(loginService.authenticate("user123", "wrongPassword")).thenReturn(0);
 		
 		mockMvc.perform(post("/api/login")
 						.contentType(MediaType.APPLICATION_JSON)

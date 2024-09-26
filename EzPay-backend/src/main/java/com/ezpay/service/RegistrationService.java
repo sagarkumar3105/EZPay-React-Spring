@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import com.ezpay.controller.KeyController;
 import com.ezpay.entity.Customer;
 import com.ezpay.repository.MasterDataRepository;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -25,13 +26,15 @@ public class RegistrationService {
 	@Autowired
 	private MasterDataRepository masterDataRepository;
 	
+	@Autowired
+	private KeyController keyController;
+	
 	@Transactional
 	public Customer AddTempProfileDetailsAndSave(String userId) {
 		Customer customer=new Customer();
 		
 		String userIdFiller= userId.length()>10 ? userId.substring(0, 9) : userId + "0".repeat(10-userId.length());
-		
-		
+			
 		
         customer.setName("TEMP_NAME"+userIdFiller); // Temporary value
         customer.setEmail("TEMP_EMAIL"+userIdFiller); // Temporary value

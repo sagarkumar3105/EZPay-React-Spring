@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "fraud_entries")
+@Table(name = "FRAUD_ENTRIES")
 public class FraudEntry {
 
     @Id

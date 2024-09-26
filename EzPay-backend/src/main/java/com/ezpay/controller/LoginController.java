@@ -47,7 +47,7 @@ public class LoginController {
 
 		String userId = payload.get("userId").asText();
 	    String password = payload.get("password").asText();
-		boolean isLoggedIn = loginService.authenticate(userId, password);
+		int isLoggedIn = loginService.authenticate(userId, password);
         
         if (isLoggedIn==1) {
         	boolean isProfileInfoSet = loginService.getIsProfileInfoSetStatus(userId);

@@ -8,7 +8,7 @@ import javax.crypto.spec.SecretKeySpec;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "KMS2", uniqueConstraints = @UniqueConstraint(columnNames = "customer_id"))
+@Table(name = "KMS", uniqueConstraints = @UniqueConstraint(columnNames = "customer_id"))
 public class KeyManagement {
 	
     @Id

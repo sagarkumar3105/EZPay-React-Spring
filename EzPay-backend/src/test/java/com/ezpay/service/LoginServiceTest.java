@@ -43,8 +43,8 @@ public class LoginServiceTest {
 		
 		when(loginDataRepository.findById(userId)).thenReturn(Optional.of(loginData));
 		
-		boolean result = loginService.authenticate(userId, password);
-		assertTrue(result);
+		int result = loginService.authenticate(userId, password);
+		assertTrue(result==1 ? true:false);
 	}
 	
 	@Test
@@ -54,8 +54,8 @@ public class LoginServiceTest {
 		
 		when(loginDataRepository.findById(userId)).thenReturn(Optional.empty());
 		
-		boolean result = loginService.authenticate(userId, password);
-		assertFalse(result);
+		int result = loginService.authenticate(userId, password);
+		assertFalse(result==1 ? true:false);
 	}
 	
 	@Test
@@ -70,8 +70,8 @@ public class LoginServiceTest {
 		
 		when(loginDataRepository.findById(userId)).thenReturn(Optional.of(loginData));
 		
-		boolean result = loginService.authenticate(userId, password);
-		assertFalse(result);
+		int result = loginService.authenticate(userId, password);
+		assertFalse(result==1 ? true:false);
 	}
 	
 	@Test

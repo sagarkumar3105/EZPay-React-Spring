@@ -11,10 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ezpay.controller.FraudDetectionController;
+import com.ezpay.controller.KeyController;
 import com.ezpay.entity.Customer;
 import com.ezpay.entity.LoginData;
+import com.ezpay.entity.SuspiciousActivity;
 import com.ezpay.repository.LoginDataRepository;
 import com.ezpay.repository.MasterDataRepository;
+import com.ezpay.repository.SuspiciousActivityRepository;
 import com.ezpay.utils.PasswordUtils;
 
 import jakarta.transaction.Transactional;
@@ -86,7 +90,7 @@ public class LoginService {
 	        
 	        loginData.setCustomer(customer);
 	        
-	        loginData.setBlockedCode(0); // Default value
+	        //loginData.setBlockedCode(0); // Default value
 	         
 		 //Change made by UC5 , before blockId 0 was entered, now the corresponding entity is added
 	        SuspiciousActivity sus = suspiciousActivityRepository.findById(0).orElse(null);

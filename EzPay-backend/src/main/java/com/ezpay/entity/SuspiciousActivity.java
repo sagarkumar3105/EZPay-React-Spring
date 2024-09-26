@@ -12,7 +12,7 @@ package com.ezpay.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "suspicious_activities")
+@Table(name = "SUSPICIOUS_ACTIVITIES")
 public class SuspiciousActivity {
 
     @Id

@@ -81,7 +81,6 @@ public class LoginDataRepositoryTest {
 		LoginData loginData = new LoginData();
 		loginData.setUserId("user" + System.currentTimeMillis()); // Unique user ID
 		loginData.setPasswordHash("hashedPassword123");
-		loginData.setBlockedCode(0);
 		// Assume there's a method to set Customer
 		loginData.setCustomer(customer);
 		return loginData;

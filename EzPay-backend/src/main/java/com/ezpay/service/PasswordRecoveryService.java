@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 import com.ezpay.entity.Customer;
 import com.ezpay.entity.LoginData;
 import com.ezpay.entity.PasswordRecoveryDetails;
+import com.ezpay.entity.SuspiciousActivity;
+import com.ezpay.repository.FraudEntryRepository;
 import com.ezpay.repository.LoginDataRepository;
 import com.ezpay.repository.MasterDataRepository;
 import com.ezpay.repository.PasswordRecoveryDetailsRepository;
+import com.ezpay.repository.SuspiciousActivityRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

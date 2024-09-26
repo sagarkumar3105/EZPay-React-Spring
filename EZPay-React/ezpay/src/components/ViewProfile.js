@@ -34,7 +34,7 @@ function Profile() {
   }, []);
 
   const isValidImage = (url) => {
-    return url && (url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png') || url.endsWith('.gif'));
+    return url && (url.includes('.jpg') || url.includes('.jpeg') || url.includes('.png') || url.includes('.gif'));
   };
 
   return (

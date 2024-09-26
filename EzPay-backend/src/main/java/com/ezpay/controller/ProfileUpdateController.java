@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
 import com.ezpay.service.ProfileUpdateService;
 import com.ezpay.entity.Customer;
@@ -71,9 +72,21 @@ public class ProfileUpdateController {
             customerService.saveCustomer(existingCustomer);
             return ResponseEntity.ok("Customer updated successfully");
 
+        } catch (DataIntegrityViolationException e) {
+            // Handle unique constraint violations, e.g., email or mobile number already exists
+        	  if (e.getMessage().contains("UK_7WA7ECASU30CFW9UT2QBKFBCA")) {
+                  // This is the email constraint
+                  return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists: " + updatedCustomer.getEmail());
+              } else if (e.getMessage().contains("UK_2LFT8XJKC2HKCACV4CR1OTV0K")) {
+                  // This is the mobile number constraint
+                  return ResponseEntity.status(HttpStatus.CONFLICT).body("Mobile number already exists: " + updatedCustomer.getMobileNumber());
+              }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update customer");
         } catch (Exception e) {
+            logger.error("Error updating customer: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update customer: " + e.getMessage());
         }
     }
 
 }
+

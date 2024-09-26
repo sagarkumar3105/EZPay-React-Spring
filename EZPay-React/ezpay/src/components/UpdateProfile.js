@@ -23,7 +23,6 @@ const UpdateProfile = () => {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [passwordError, setPasswordError] = useState('');
   const [errors, setErrors] = useState({});
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,7 +42,6 @@ const UpdateProfile = () => {
           address: data.address || '',
           profilePictureUrl: data.profilePictureUrl || '',
         });
-        // console.log(data)
       } catch (error) {
         console.error('Error fetching customer data:', error);
         setMessage('Error fetching data');
@@ -65,116 +63,187 @@ const UpdateProfile = () => {
     });
   };
 
+  const validate = () => {
+    const errors = {};
+
+    // Name validation
+    if (!newValues.newName && !formData.name) {
+      errors.newName = 'Name is required';
+     } else if (newValues.newName && !/^[A-Za-z\s]+$/.test(newValues.newName)) {
+       errors.newName = 'Name must contain only letters';
+    }
+
+    // Email validation
+    if (!newValues.newEmail && !formData.email) {
+      errors.newEmail = 'Email is required';
+    } else if (newValues.newEmail && !/^\S+@\S+\.\S+$/.test(newValues.newEmail)) {
+      errors.newEmail = 'Invalid email format';
+    }
+
+    // Mobile number validation
+    if (!newValues.newMobileNumber && !formData.mobileNumber) {
+      errors.newMobileNumber = 'Mobile number is required';
+    } else if (newValues.newMobileNumber && !/^(\+91[\-\s]?)?(\91[\-\s]?)?[0]?(91)?[6789]\d{9}$/.test(newValues.newMobileNumber)) {
+      errors.newMobileNumber = 'Invalid mobile number';
+    }
+
+    // Address validation
+    if (!newValues.newAddress && !formData.address) {
+      errors.newAddress = 'Address is required';
+    }
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShowPasswordModal(true);
+
+    if (validate()) {
+      setShowPasswordModal(true);
+    }
   };
 
   const handleConfirmUpdate = async () => {
     try {
-        const customerId = localStorage.getItem('customerId');
-        
-        // Verify password
-        const verifyResponse = await fetch('http://localhost:8005/customers/verify-password', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ customerId, password }),
-        });
-
-        if (!verifyResponse.ok) {
-            const errorData = await verifyResponse.json();
-            setPasswordError(errorData.message);
-            return; // Stop further execution if password verification fails
+      const customerId = localStorage.getItem('customerId');
+  
+      // Verify password
+      const verifyResponse = await fetch('http://localhost:8005/customers/verify-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ customerId, password }),
+      });
+  
+      // Handle incorrect password (401 Unauthorized)
+      if (verifyResponse.status === 401) {
+        const errorText = await verifyResponse.text(); // Get the text response
+        setPasswordError(errorText); // Set the password error message
+        return; // Stop further execution if password verification fails
+      }
+  
+      // Prepare updated data - Only changed fields
+      const updatedData = {
+        customerId,
+        name: newValues.newName || formData.name,
+        email: newValues.newEmail || formData.email,
+        mobileNumber: newValues.newMobileNumber || formData.mobileNumber,
+        address: newValues.newAddress || formData.address,
+        profilePictureUrl: newValues.newprofilePictureUrl || formData.profilePictureUrl,
+      };
+  
+      // Update customer details
+      const updateResponse = await fetch(`http://localhost:8005/customers/update?customerId=${customerId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+      });
+  
+      let responseData;
+      const contentType = updateResponse.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        responseData = await updateResponse.json(); // Parse as JSON
+      } else {
+        responseData = await updateResponse.text(); // Parse as plain text
+      }
+  
+      if (updateResponse.status === 409) { // Handle conflict status
+        if (responseData.includes("Email already exists")) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            newEmail: responseData,
+          }));
+        } else if (responseData.includes("Mobile number already exists")) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            newMobileNumber: responseData,
+          }));
+        } else {
+          setMessage(responseData);
         }
-
-        // Prepare updated data - Only changed fields
-        const updatedData = {
-          customerId,
-          name: newValues.newName || formData.name, // Fallback to existing values if the input is not changed
-          email: newValues.newEmail || formData.email,
-          mobileNumber: newValues.newMobileNumber || formData.mobileNumber,
-          address: newValues.newAddress || formData.address,
-          profilePictureUrl: newValues.newprofilePictureUrl || formData.profilePictureUrl,
-        };
-
-        // Update customer details
-        const updateResponse = await fetch(`http://localhost:8005/customers/update?customerId=${customerId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedData),
-        });
-
-        if (!updateResponse.ok) {
-            const errorData = await updateResponse.json();
-            setMessage(errorData.message);
-            return;
-        }
-
-        setMessage('Profile updated successfully!');
-        setShowPasswordModal(false); // Close modal after update
-
+        return;
+      }
+  
+      if (!updateResponse.ok) {
+        setMessage(responseData);
+        return;
+      }
+  
+      setMessage('Profile updated successfully!');
+      setShowPasswordModal(false); // Close modal after update
+  
     } catch (error) {
-        console.error('Error during update:', error);
-        setMessage('Error updating profile');
+      console.error('Error during update:', error);
+      setMessage('Error updating profile');
     }
-};
-
+  };
+  
+  
+  
   const getInputStyle = (fieldName) => {
     return changedFields[fieldName] ? { backgroundColor: '#f0e5e5' } : {}; // Darker shade on change
   };
 
   return (
     <div className="container">
-      <h2 className="welcome-title">Update Profile</h2>
+      <h2>Update Profile</h2>
       {message && <div className="message">{message}</div>}
-      <form onSubmit={handleSubmit} className="updateForm">
+      <form onSubmit={handleSubmit}>
         <div className="input-container">
           <label>Name:</label>
           <input
             type="text"
             name="newName"
-            value={newValues.newName} // Start empty, the user can type or leave it blank
+            value={newValues.newName}
             onChange={handleChange}
-            placeholder={formData.name} // Show current name as a placeholder
+            placeholder={formData.name}
             style={getInputStyle('newName')}
+            className={errors.newName ? 'error-input' : ''}
           />
+          {errors.newName && <p className="error-message">{errors.newName}</p>}
         </div>
         <div className="input-container">
           <label>Email:</label>
           <input
             type="email"
             name="newEmail"
-            value={newValues.newEmail} // Start empty, the user can type or leave it blank
+            value={newValues.newEmail}
             onChange={handleChange}
-            placeholder={formData.email} // Show current email as a placeholder
+            placeholder={formData.email}
             style={getInputStyle('newEmail')}
+            className={errors.newEmail ? 'error-input' : ''}
           />
+          {errors.newEmail && <p className="error-message">{errors.newEmail}</p>}
         </div>
         <div className="input-container">
           <label>Mobile Number:</label>
           <input
             type="text"
             name="newMobileNumber"
-            value={newValues.newMobileNumber} // Start empty
+            value={newValues.newMobileNumber}
             onChange={handleChange}
-            placeholder={formData.mobileNumber} // Show current mobile number as a placeholder
+            placeholder={formData.mobileNumber}
             style={getInputStyle('newMobileNumber')}
+            className={errors.newMobileNumber ? 'error-input' : ''}
           />
+          {errors.newMobileNumber && <p className="error-message">{errors.newMobileNumber}</p>}
         </div>
         <div className="input-container">
           <label>Address:</label>
           <input
             type="text"
             name="newAddress"
-            value={newValues.newAddress} // Start empty
+            value={newValues.newAddress}
             onChange={handleChange}
-            placeholder={formData.address} // Show current address as a placeholder
+            placeholder={formData.address}
             style={getInputStyle('newAddress')}
+            className={errors.newAddress ? 'error-input' : ''}
           />
+          {errors.newAddress && <p className="error-message">{errors.newAddress}</p>}
         </div>
         <div className="input-container">
           <label>Profile Picture URL:</label>
@@ -187,8 +256,8 @@ const UpdateProfile = () => {
             style={getInputStyle('newprofilePictureUrl')}
           />
         </div>
-        <button className="submit-button" type="submit">Update Profile</button>
-        <button type="button" className="cancel-button" onClick={() => navigate('/view-profile')}>Cancel</button>
+        <button className="button" type="submit">Update Profile</button>
+        <button type="button" className="button" onClick={() => navigate('/view-profile')}>Cancel</button>
       </form>
 
       {showPasswordModal && (

@@ -87,6 +87,7 @@ export default function InitialProfileUpdatePage() {
         },
         body: JSON.stringify(profileData),
       },
+      
     );
 
     if (response.ok) {
@@ -301,7 +302,7 @@ export default function InitialProfileUpdatePage() {
               {...register("ifscCode", {
                 required: "Enter IFSC Code",
                 pattern: {
-                  value: /^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/,
+                  value: /^[A-Za-z]{3}[A-Z0-9a-z]{8}$/,
                   message: "Invalid IFSC Code",
                 },
               })}

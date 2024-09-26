@@ -29,6 +29,9 @@ public class RegistrationService {
 	@Autowired
 	private KeyController keyController;
 	
+	@Autowired
+	private KeyService keyService;
+	
 	@Transactional
 	public Customer AddTempProfileDetailsAndSave(String userId) {
 		Customer customer=new Customer();
@@ -64,6 +67,7 @@ public class RegistrationService {
         if(!customerOp.isPresent()) {
         return false; //User not found
         }
+
         Customer customer=customerOp.get();
 
         customer.setName(payload.get("name").asText());
@@ -82,7 +86,13 @@ public class RegistrationService {
         String upiId=payload.get("mobileNumber").asText()+"@ezpay";
         customer.setUpiId(upiId);
      
+		System.out.println("----------------------------> Got in to add initial data:--->"+payload.get("bankAccountNumber").asText());
+		//String bankAccountNumber=keyService.decryptText(payload.get("bankAccountNumber").asText(),payload.get("customerId").asLong());
         customer.setBankAccountNumber(payload.get("bankAccountNumber").asText()); 
+		
+        //System.out.println("---------------------------->"+bankAccountNumber);
+
+        //System.out.println("----->"+keyService.decryptText(payload.get("bankAccountNumber").asText(),payload.get("customerId").asLong()));
         customer.setIfscCode(payload.get("ifscCode").asText()); 
         customer.setAccountType(payload.get("accountType").asInt());
         
@@ -90,7 +100,7 @@ public class RegistrationService {
         masterDataRepository.save(customer);
 
 	// USECASE 5 REGISTER KEY FUNCTIONALITY
-        keyController.registerKey(customer.getCustomerId());
+        keyController.registerKey(payload.get("customerId").asLong());
 
         return true; // Details updated
 	}

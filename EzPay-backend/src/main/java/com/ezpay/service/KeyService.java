@@ -45,8 +45,8 @@ public class KeyService {
 	        keyRepository.save(keyManagement);
 	        
 	        //setting the encrypted address and encrypted Account number into the database, since its the first time it is set like this
-	        String encryptedAddress = encrypt(customer.getAddress(),keyManagement.getKey());
-	        customer.setAddress(encryptedAddress);
+	        //String encryptedAddress = encrypt(customer.getAddress(),keyManagement.getKey());
+	        //customer.setAddress(encryptedAddress);
 	        
 	        String encryptedAccNo= encrypt(customer.getBankAccountNumber(),keyManagement.getKey());
 	        customer.setBankAccountNumber(encryptedAccNo);
@@ -65,10 +65,10 @@ public class KeyService {
     {
     	KeyManagement newKey = keyRepository.findByCustomerCustomerId(customerId);
     	Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new RuntimeException("Exception Occurred in UC5 KeyService RegisterKey: Customer not found"));
-    	String address = decrypt(customer.getAddress(),oldKey);
+    	//String address = decrypt(customer.getAddress(),oldKey);
     	String accno= decrypt(customer.getBankAccountNumber(),oldKey);
     	
-    	customer.setAddress(encrypt(address,newKey.getKey()));
+    	//customer.setAddress(encrypt(address,newKey.getKey()));
     	customer.setBankAccountNumber(encrypt(accno,newKey.getKey()));
     	
     	customerRepository.save(customer);
@@ -204,8 +204,9 @@ public class KeyService {
    }
 
    public String decryptText(String encryptedText, Long customerId) {
-       
+       		//System.out.println("------>   IN Decrpt");
            KeyManagement keyManagement = keyRepository.findByCustomerCustomerId(customerId);
+           
            if (keyManagement == null) {
                throw new RuntimeException("Exception Ocurred in UC5 KeyService decrypt:No key found for the given customerId");
            }

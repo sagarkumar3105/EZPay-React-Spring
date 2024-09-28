@@ -1,16 +1,16 @@
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Register from './components/Register';
-import LoginPage from './components/LoginPage';
-import ProfileHome from './components/ProfileHome';
-import InitialProfileUpdatePage from './components/InitialProfileUpdatePage';
-import PrivateRoute from './components/PrivateRoute';
-import ViewProfile from './components/ViewProfile';
-import PasswordRecovery from './components/PasswordRecovery';
-import PasswordReset from './components/PasswordReset';
-import UpdateProfile from './components/UpdateProfile'; // Import your Update Profile component
+import Home from './components/Home/Home';
+import Register from './components/Register/Register';
+import LoginPage from './components/LoginPage/LoginPage';
+import ProfileHome from './components/ProfileHome/ProfileHome';
+import InitialProfileUpdatePage from './components/InitialProfileUpdatePage/InitialProfileUpdatePage';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import ViewProfile from './components/ViewProfile/ViewProfile';
+import PasswordRecovery from './components/PasswordRecovery/PasswordRecovery';
+import PasswordReset from './components/PasswordReset/PasswordReset';
+import UpdateProfile from './components/UpdateProfile/UpdateProfile'; // Import your Update Profile component
 
 function App() {
   return (

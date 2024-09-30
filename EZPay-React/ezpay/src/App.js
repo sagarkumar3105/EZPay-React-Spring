@@ -11,6 +11,10 @@ import ViewProfile from './components/ViewProfile/ViewProfile';
 import PasswordRecovery from './components/PasswordRecovery/PasswordRecovery';
 import PasswordReset from './components/PasswordReset/PasswordReset';
 import UpdateProfile from './components/UpdateProfile/UpdateProfile'; // Import your Update Profile component
+import Dashboard from "./components/Dashboard/Dashboard"
+/*
+@Author: Sagar Kumar
+*/
 
 function App() {
   return (
@@ -29,7 +33,7 @@ function App() {
           {/* Protected Route */}
           <Route path="/profileHome" element={
             <PrivateRoute>
-              <ProfileHome />
+              <Dashboard />
             </PrivateRoute>
           } />
 
